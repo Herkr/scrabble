@@ -17,7 +17,7 @@ function Scrabble() {
   return (
       <Router>
         <div>
-          <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} />
+          <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Finn so nógv orð sum gjørligt' />
           <input type='button' value='Leita' className='App-button' /> 
           
 
