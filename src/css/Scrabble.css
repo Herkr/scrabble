@@ -1,0 +1,50 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #b9b3f7;
+  font-family: "Arial Black", sans-serif;
+  font-size: 50px;
+  color: White;
+}
+
+.App-header2 {
+  font-size: 20px;
+}
+
+.App-body {
+  background-color: #c6c2f0;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.App-button {
+  background-color: #b9b3f7; 
+  font-size: 16px;
+  border: 1.5px solid #8f86eb;
+  padding: 16px 32px;
+  transition-duration: 0.5s;
+  cursor: pointer;
+  color: white;
+}
+
+.App-button:hover {
+  background-color: #8f86eb;
+}
+
+.App-link {
+  text-decoration: none;
+  margin: 4px 2px;
+  color: white;
+}
+
+.App-input-box {
+  font-size: 16px;
+  border: 1.5px solid #8f86eb;
+  padding: 16px 32px;
+}
