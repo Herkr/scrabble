@@ -10,7 +10,7 @@ function Scrabble() {
   // localstorage
   const wordArray = () => window.localStorage.getItem('word') || '';
   const [word, setWord] = useState(wordArray);
-  const addWord = () => setWord(document.getElementById('word').value);
+  const addWord = () => setWord(document.getElementById('word').value.toLowerCase());
   
   //context state frá App.js
   const level = useContext(UserContext);
