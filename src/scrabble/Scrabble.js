@@ -10,25 +10,32 @@ function Scrabble() {
   // localstorage
   const wordArray = () => window.localStorage.getItem('word') || '';
   const [word, setWord] = useState(wordArray);
-  const addWord = () => setWord(word + document.getElementById('word').value + ', ');
+  const addWord = () => setWord(document.getElementById('word').value);
+  //const addWord = () => setWord(word + document.getElementById('word').value + ', ');
 
   //context state frá App.js
   const level = useContext(UserContext);
 
-  var randomWord = getShuffledWordFromDictionary(level);
-  var randomLetters = ShuffleWord(randomWord);
+  // get the tiles to show on screen
+  var randomWordBefore = getShuffledWordFromDictionary(level);
+  const [randomWord, setRandomWord] = useState(randomWordBefore);
+  var randomLettersBefore = ShuffleWord(randomWord);
+  const [randomLetters, setRandomLetters] = useState(randomLettersBefore);
   var tiles = getTiles(randomLetters); 
 
   return (
       <Router>
         <div>
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Finn so nógv orð sum gjørligt' />
-          <input type="submit" onClick={addWord} value="Submit" className='App-button' />
-     
+          <input type="submit" onClick={addWord} value="Leita" className='App-button' />
 
           <h2>{word}</h2>
           <h2>{randomWord}</h2>
+          <h2>{e => setRandomWord(e.target.value)}</h2>
+          <h2>{e => setRandomLetters(e.target.value)}</h2>
           <p>{tiles}</p>
+
+          <h2>{isWordInDirectory(word)}</h2>
           
           <button className="App-button"><Link to={'/toplist'} className="App-link">Eg gevi upp</Link></button>
           <button className="App-button" onClick={()=>{ alert('found and missing words'); }}>alert</button>
@@ -40,6 +47,19 @@ function Scrabble() {
         </div>
       </Router>
     );
+}
+
+function isWordInDirectory(word) {
+  // array of all the words from the dictionary
+  var wordsFromDictionary = Object.keys(Dictionary);
+
+  for (let i = wordsFromDictionary.length - 1; i > 0; i--) {
+    if(wordsFromDictionary[i] === word)
+    {
+      return 'true';
+    }
+  }
+  return 'false';
 }
 
 function getTiles(shuffledword) {
@@ -100,7 +120,6 @@ function getShuffledWordFromDictionary(lengthOfWord) {
       items.push(shuffledArray[i]);
     }
   }
-
   return items[0];
 }
 
