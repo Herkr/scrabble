@@ -11,8 +11,7 @@ function Scrabble() {
   const wordArray = () => window.localStorage.getItem('word') || '';
   const [word, setWord] = useState(wordArray);
   const addWord = () => setWord(document.getElementById('word').value);
-  //const addWord = () => setWord(word + document.getElementById('word').value + ', ');
-
+  
   //context state frá App.js
   const level = useContext(UserContext);
 
@@ -26,22 +25,23 @@ function Scrabble() {
   return (
       <Router>
         <div>
-          <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Finn so nógv orð sum gjørligt' />
+          <br />
+          <h2>Finn so nógv orð sum gjørligt, burturúr bókstavunum niðanfyri</h2>
+
+          <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autocomplete="off" />
           <input type="submit" onClick={addWord} value="Leita" className='App-button' />
 
-          <h2>{word}</h2>
-          <h2>{randomWord}</h2>
           <h2>{e => setRandomWord(e.target.value)}</h2>
           <h2>{e => setRandomLetters(e.target.value)}</h2>
           <p>{tiles}</p>
-
-          <h2>{isWordInDirectory(word)}</h2>
+          <h1>Innskrivað orð: {word}</h1>
+          <h1>{isWordInDirectory(word)}</h1>
           
-          <button className="App-button"><Link to={'/toplist'} className="App-link">Eg gevi upp</Link></button>
+          <button className="App-button"><Link to={'/scrabble/toplist'} className="App-link">Eg gevi upp</Link></button>
           <button className="App-button" onClick={()=>{ alert('found and missing words'); }}>alert</button>
           
           <Switch>
-            <Route exact path='/toplist' component={TopList} />
+            <Route exact path='/scrabble/toplist' component={TopList} />
           </Switch>
 
         </div>
@@ -56,10 +56,10 @@ function isWordInDirectory(word) {
   for (let i = wordsFromDictionary.length - 1; i > 0; i--) {
     if(wordsFromDictionary[i] === word)
     {
-      return 'true';
+      return 'Orðið bleiv funnið!';
     }
   }
-  return 'false';
+  return 'Einki orð funnið';
 }
 
 function getTiles(shuffledword) {
