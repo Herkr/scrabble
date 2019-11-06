@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import TopList from './TopList';
 import Dictionary from '../json/Dictionary.json';
@@ -7,24 +7,29 @@ import UserContext from './UserContext';
 
 function Scrabble() {
 
+  // localstorage
+  const wordArray = () => window.localStorage.getItem('word') || '';
+  const [word, setWord] = useState(wordArray);
+  const addWord = () => setWord(word + document.getElementById('word').value + ', ');
+
   //context state frá App.js
   const level = useContext(UserContext);
 
-    var randomWord = getShuffledWordFromDictionary(level);
-    var randomLetters = ShuffleWord(randomWord);
-    var tiles = getTiles(randomLetters); 
+  var randomWord = getShuffledWordFromDictionary(level);
+  var randomLetters = ShuffleWord(randomWord);
+  var tiles = getTiles(randomLetters); 
 
   return (
       <Router>
         <div>
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Finn so nógv orð sum gjørligt' />
-          <input type='button' value='Leita' className='App-button' /> 
-          
+          <input type="submit" onClick={addWord} value="Submit" className='App-button' />
+     
 
+          <h2>{word}</h2>
           <h2>{randomWord}</h2>
           <p>{tiles}</p>
           
-
           <button className="App-button"><Link to={'/toplist'} className="App-link">Eg gevi upp</Link></button>
           <button className="App-button" onClick={()=>{ alert('found and missing words'); }}>alert</button>
           
