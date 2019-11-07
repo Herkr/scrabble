@@ -7,6 +7,19 @@ import UserContext from './UserContext';
 
 function Scrabble() {
 
+  const restrictKey = event => {
+    var newRandomWord = [];
+    newRandomWord = randomWord;
+
+    for (let i = newRandomWord.length -1; i >= 0; i--) {
+      if (event.key === newRandomWord[i])
+      {
+        return;
+      }
+    }
+    return event.preventDefault();
+  }
+
   // localstorage
   const wordArray = () => window.localStorage.getItem('word') || '';
   const [word, setWord] = useState(wordArray);
@@ -28,13 +41,14 @@ function Scrabble() {
           <br />
           <h2>Finn so nógv orð sum gjørligt, burturúr bókstavunum niðanfyri</h2>
 
-          <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autocomplete="off" />
+          <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autocomplete="off" onKeyPress={(event) => restrictKey(event)} />
           <input type="submit" onClick={addWord} value="Leita" className='App-button' />
 
           <h2>{e => setRandomWord(e.target.value)}</h2>
           <h2>{e => setRandomLetters(e.target.value)}</h2>
           <p>{tiles}</p>
           <h1>Innskrivað orð: {word}</h1>
+          <h1>Random orð: {randomWord}</h1>
           <h1>{isWordInDirectory(word)}</h1>
           
           <button className="App-button"><Link to={'/scrabble/toplist'} className="App-link">Eg gevi upp</Link></button>
