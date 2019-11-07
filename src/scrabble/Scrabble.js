@@ -40,17 +40,16 @@ function Scrabble() {
       <Router>
         <div>
           <br />
-          <h2>Finn so nógv orð sum gjørligt, burturúr bókstavunum niðanfyri</h2>
+          <h3>Finn so nógv orð sum gjørligt, burturúr bókstavunum niðanfyri</h3>
 
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autocomplete="off" onKeyPress={(event) => restrictKey(event)} />
           <input type="submit" onClick={addWord} value="Leita" className='App-button' />
 
           <h2>{e => setRandomWord(e.target.value)}</h2>
           <h2>{e => setRandomLetters(e.target.value)}</h2>
+          <h2>{isWordInDirectory(word)}</h2>
           <p>{tiles}</p>
-          <h1>Innskrivað orð: {word}</h1>
-          <h1>Random orð: {randomWord}</h1>
-          <h1>{isWordInDirectory(word)}</h1>
+          <h2>Sinasta orð: {word}</h2>
           
           <button className="App-button"><Link to={'/scrabble/toplist'} className="App-link">Eg gevi upp</Link></button>
           <button className="App-button" onClick={()=>{ alert('found and missing words'); }}>alert</button>
@@ -68,13 +67,17 @@ function isWordInDirectory(word) {
   // array of all the words from the dictionary
   var wordsFromDictionary = Object.keys(Dictionary);
 
-  for (let i = wordsFromDictionary.length - 1; i > 0; i--) {
-    if(wordsFromDictionary[i] === word)
-    {
-      return 'Orðið bleiv funnið!';
+  if(word.length !== 0)
+  {
+    for (let i = wordsFromDictionary.length - 1; i > 0; i--) {
+      if(wordsFromDictionary[i] === word)
+      {
+        return alert('Orðið bleiv funnið!');
+      }
     }
+    return alert('Einki orð funnið');
   }
-  return 'Einki orð funnið';
+  return;
 }
 
 function getTiles(shuffledword) {
