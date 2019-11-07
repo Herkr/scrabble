@@ -12,11 +12,12 @@ function Scrabble() {
     newRandomWord = randomWord;
 
     for (let i = newRandomWord.length -1; i >= 0; i--) {
-      if (event.key === newRandomWord[i])
+      if (event.key === newRandomWord[i] || event.key.toUpperCase() === newRandomWord[i].toUpperCase())
       {
         return;
       }
     }
+    // no letter is written in textbox
     return event.preventDefault();
   }
 
