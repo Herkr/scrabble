@@ -48,3 +48,17 @@
   padding: 16px 32px;
   width: 150px;
 }
+
+.App-greenAlert {
+  font-size: 16px;
+  padding: 16px 32px;
+  background-color: rgb(95, 250, 173);
+  color: rgb(22, 117, 70);
+}
+
+.App-redAlert {
+  font-size: 16px;
+  padding: 16px 32px;
+  background-color: rgb(255, 106, 130);
+  color: rgb(117, 22, 22);
+}
