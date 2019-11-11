@@ -7,6 +7,7 @@ import UserContext from './UserContext';
 
 function Scrabble() {
 
+
   const restrictKey = event => {
     var newRandomWord = [];
     newRandomWord = randomWord;
@@ -24,8 +25,8 @@ function Scrabble() {
   // localstorage
   const wordArray = () => window.localStorage.getItem('word') || '';
   const [word, setWord] = useState(wordArray);
-  const addWord = () => setWord(document.getElementById('word').value.toLowerCase());
-  
+  const addWord = () => setWord(document.getElementById('word').value.toLowerCase() + ' ' + word);
+
   //context state frá App.js
   const level = useContext(UserContext);
 
@@ -36,20 +37,32 @@ function Scrabble() {
   const [randomLetters, setRandomLetters] = useState(randomLettersBefore);
   var tiles = getTiles(randomLetters); 
 
+  // array with the true words from the dictionary
+  var trueWords = getArrayOfTrueWords(word);
+  const countTrueWords = () => {
+    if(trueWords.length !== 0)
+    {
+      return trueWords.split(',').length;
+    }
+    return 0;
+  }
+
   return (
       <Router>
         <div>
           <br />
           <h3>Finn so nógv orð sum gjørligt, burturúr bókstavunum niðanfyri</h3>
+          <h2>Funnin orð: {trueWords}</h2>
+          <h2>Øll orð: {word}</h2>
+          <h1>Stig: {getScoreForWord(trueWords)}  orð: {countTrueWords()}</h1>
 
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autocomplete="off" onKeyPress={(event) => restrictKey(event)} />
-          <input type="submit" onClick={addWord} value="Leita" className='App-button' />
+          <input type="submit" onClick={(event) =>{ addWord();}} value="Leita" className='App-button' />
 
           <h2>{e => setRandomWord(e.target.value)}</h2>
           <h2>{e => setRandomLetters(e.target.value)}</h2>
           <p>{tiles}</p>
-          <h2>Sinasta orð: {word}</h2>
-          <h2>{isWordInDirectory(word)}</h2>
+          <h2>{showAlert(word.substr(0,word.indexOf(' ')))}</h2>
           
           <button className="App-button"><Link to={'/scrabble/toplist'} className="App-link">Eg gevi upp</Link></button>
           <button className="App-button" onClick={()=>{ alert(' missing words'); }}>Onnur orð</button>
@@ -63,6 +76,65 @@ function Scrabble() {
     );
 }
 
+function getArrayOfTrueWords(string){
+  var allItems = [];
+  var items = [];
+
+  // put all items in an array
+  for (let i = string.toString().split(' ').length; i >= 0; i--)
+  {
+    allItems = string.split(' ', string.toString().split(' ').length -1);
+  }
+  
+  for(let i = allItems.length - 1; i >= 0; i--)
+  {
+    // if word is in directory
+      if(isWordInDirectory(allItems[i]) === true)
+      {
+        // else push
+        items.push(allItems[i]);
+      }
+  }
+  return items.toString();
+}
+
+function  getScoreForWord(word) {
+  var score = 0;
+    for(let i = word.length - 1; i >= 0; i--) {
+      for(let j = Alphabet.length - 1; j >= 0; j--) {
+        if (word[i] === Alphabet[j].id)
+        {
+          score = score + Number(Alphabet[j].value);
+        }
+      }
+  }
+    return score;
+}
+
+function showAlert(word)
+{
+  if (word.length !== 0)
+  {
+    if (isWordInDirectory(word) === true)
+    {
+      return (
+        <div class="App-greenAlert">
+          {word} funnið! stig: {getScoreForWord(word)}
+        </div>
+      );
+    }
+    else
+    {
+      return (
+        <div class="App-redAlert">
+          {word} ikki funnið!
+        </div>
+      );
+    }
+  }
+  return;
+}
+
 function isWordInDirectory(word) {
   // array of all the words from the dictionary
   var wordsFromDictionary = Object.keys(Dictionary);
@@ -72,18 +144,10 @@ function isWordInDirectory(word) {
     for (let i = wordsFromDictionary.length - 1; i >= 0; i--) {
       if(wordsFromDictionary[i] === word)
       {
-        return (
-          <div class="App-greenAlert">
-            Eitt orð funnið!
-          </div>
-        );
+        return true;
       }
     }
-    return (
-      <div class="App-redAlert">
-        Einki orð funnið!
-      </div>
-    );
+    return false;
   }
   return;
 }
