@@ -51,9 +51,7 @@ function Scrabble() {
       <Router>
         <div>
           <br />
-          <h3>Finn so nógv orð sum gjørligt, burturúr bókstavunum niðanfyri</h3>
-          <h2>Funnin orð: {trueWords}</h2>
-          <h2>Øll orð: {word}</h2>
+          <h3>Finn so nógv orð sum gjørligt burturúr bókstavunum niðanfyri</h3>
           <h1>Stig: {getScoreForWord(trueWords)}  orð: {countTrueWords()}</h1>
 
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autocomplete="off" onKeyPress={(event) => restrictKey(event)} />
