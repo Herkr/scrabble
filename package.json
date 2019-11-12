@@ -4,11 +4,14 @@
   "private": true,
   "homepage": "https://herkr.github.io/scrabble",
   "dependencies": {
+    "firebase": "^7.3.0",
+    "fixed-data-table": "^0.6.5",
     "gh-pages": "^2.1.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "react-table": "^6.10.3"
   },
   "scripts": {
     "start": "react-scripts start",
