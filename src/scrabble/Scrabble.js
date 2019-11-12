@@ -38,7 +38,7 @@ function Scrabble() {
   var tiles = getTiles(randomLetters); 
 
   // array with the true words from the dictionary
-  var trueWords = getArrayOfTrueWords(word);
+  var trueWords = getArrayOfTrueWords(word)
   const countTrueWords = () => {
     if(trueWords.length !== 0)
     {
@@ -51,16 +51,19 @@ function Scrabble() {
       <Router>
         <div>
           <br />
-          <h3>Finn so nógv orð sum gjørligt burturúr bókstavunum niðanfyri</h3>
-          <h1>Stig: {getScoreForWord(trueWords)}  orð: {countTrueWords()}</h1>
+          <h1 className='App-score'>Stig: {getScoreForWord(trueWords)} | Orð: {countTrueWords()}</h1>
 
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autocomplete="off" onKeyPress={(event) => restrictKey(event)} />
           <input type="submit" onClick={(event) =>{ addWord();}} value="Leita" className='App-button' />
+
+          <h3>Finn so nógv orð sum gjørligt burturúr bókstavunum niðanfyri</h3>
 
           <h2>{e => setRandomWord(e.target.value)}</h2>
           <h2>{e => setRandomLetters(e.target.value)}</h2>
           <p>{tiles}</p>
           <h2>{showAlert(word.substr(0,word.indexOf(' ')))}</h2>
+
+          <h2>funnin orð: {trueWords}</h2>
           
           <button className="App-button"><Link to={'/scrabble/toplist'} className="App-link">Eg gevi upp</Link></button>
           <button className="App-button" onClick={()=>{ alert(' missing words'); }}>Onnur orð</button>
@@ -89,8 +92,10 @@ function getArrayOfTrueWords(string){
     // if word is in directory
       if(isWordInDirectory(allItems[i]) === true)
       {
-        // else push
-        items.push(allItems[i]);
+        if(!items.includes(allItems[i]))
+        {
+          items.push(allItems[i]);
+        }
       }
   }
   return items.toString();
@@ -104,7 +109,7 @@ function  getScoreForWord(word) {
         {
           score = score + Number(Alphabet[j].value);
         }
-      }
+      } 
   }
     return score;
 }
@@ -117,7 +122,7 @@ function showAlert(word)
     {
       return (
         <div class="App-greenAlert">
-          {word} funnið! stig: {getScoreForWord(word)}
+          "{word}" funnið! Tú hevur fingið {getScoreForWord(word)} stig :)
         </div>
       );
     }
@@ -125,7 +130,7 @@ function showAlert(word)
     {
       return (
         <div class="App-redAlert">
-          {word} ikki funnið!
+          "{word}" ikki funnið!
         </div>
       );
     }
