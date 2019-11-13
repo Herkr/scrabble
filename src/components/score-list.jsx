@@ -34,7 +34,7 @@ const ScoreList = () => {
 
     return (
         <div>
-            <h1 className='App-score'>Top 10 list</h1>
+            <h2 className='App-score'>Top 10 list</h2>
             <div>
                 <label>Sort By:</label> {' '}
                 <select value={sortBy} onChange={e => setSortBy(e.currentTarget.value)}>
@@ -53,7 +53,7 @@ const ScoreList = () => {
                     {scores.map((s) =>
                     <tr key={s.id}>
                         <td>{s.name}</td>
-                        <td><code>{s.score} stig</code></td>
+                        <td>{s.score} stig</td>
                     </tr>
                     )}
                 </tbody>

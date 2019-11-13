@@ -8,6 +8,13 @@
   font-size: 50px;
   color: White;
 }
+.App-header-list {
+  background-color: #b9b3f7;
+  font-family: "Arial Black", sans-serif;
+  font-size: 50px;
+  color: White;
+  font-size: 20px;
+}
 
 .App-header2 {
   font-size: 20px;
@@ -68,7 +75,7 @@
 } 
 
 table {
-  width: 400px;
+  width: 550px;
 }
 
 thead {
@@ -76,6 +83,6 @@ thead {
 }
 
 tbody {
-  background-color: #b9b3f7;
-  border: 1px solid black;
+  background-color: white;
+  color: #8f86eb;
 }

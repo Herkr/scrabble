@@ -9,14 +9,17 @@ function TopList() {
   const score = useContext(UserContext);
   
     return (
-        <div>
+      <div className="App">
+      <header className="App-header-list">
           <br />
-          <h2>Tú hevur fingið {score} stig</h2>
-          <h3>Skriva títt navn niðanfyri og goym títt úslit</h3>
+          <h3>Tú hevur fingið {score} stig</h3>
+          <h4>Skriva títt navn niðanfyri og goym títt úslit</h4>
+
           <AddScoreEntryForm />
           <ScoreList />
           
           <br />
+          </header>
         </div>
     );
 }
