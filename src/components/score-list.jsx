@@ -42,18 +42,36 @@ const ScoreList = () => {
                     <option value='SCORE_ASC'>score (least)</option>
                 </select>
             </div>
-            <ol>
-                {scores.map((s) =>
-                <li key={s.id}>
-                    <div>
-                        {s.name}
-                        <code>{s.score} stig</code>
-                    </div>
-                </li>
-                )}
-            </ol>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Score</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {scores.map((s) =>
+                    <tr key={s.id}>
+                        <td>{s.name}</td>
+                        <td><code>{s.score} stig</code></td>
+                    </tr>
+                    )}
+                </tbody>
+            </table>
         </div>
     )
 }
 
 export default ScoreList;
+
+/*
+<ol>
+    {scores.map((s) =>
+    <li key={s.id}>
+        <div>
+            {s.name} <code>{s.score} stig</code>
+        </div>
+    </li>
+    )}
+</ol>
+*/

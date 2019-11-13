@@ -4,6 +4,7 @@ import TopList from './TopList';
 import Dictionary from '../json/Dictionary.json';
 import Alphabet from './Alphabet';
 import UserContext from './UserContext';
+import { UserProvider } from './UserContext';
 
 function Scrabble() {
 
@@ -47,11 +48,13 @@ function Scrabble() {
     return 0;
   }
 
+  const score = getScoreForWord(trueWords);
+
   return (
       <Router>
         <div>
           <br />
-          <h1 className='App-score'>Stig: {getScoreForWord(trueWords)} | Orð: {countTrueWords()}</h1>
+          <h1 className='App-score'>Stig: {score} | Orð: {countTrueWords()}</h1>
 
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autocomplete="off" onKeyPress={(event) => restrictKey(event)} />
           <input type="submit" onClick={(event) =>{ addWord();}} value="Leita" className='App-button' />
@@ -69,7 +72,9 @@ function Scrabble() {
           <button className="App-button" onClick={()=>{ alert(' missing words'); }}>Onnur orð</button>
           
           <Switch>
-            <Route exact path='/scrabble/toplist' component={TopList} />
+            <UserProvider value={score}>
+              <Route exact path='/scrabble/toplist' component={TopList} />
+            </UserProvider>
           </Switch>
 
         </div>

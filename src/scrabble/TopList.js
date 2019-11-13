@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ScoreList from '../components/score-list';
 import AddScoreEntryForm from '../components/add-score-entry-form';
+import UserContext from './UserContext';
 
 function TopList() {
+
+  //context state frá App.js
+  const score = useContext(UserContext);
   
     return (
         <div>
           <br />
-          <h2>Tú fekkst # stig</h2>
+          <h2>Tú hevur fingið {score} stig</h2>
           <h3>Skriva títt navn niðanfyri og goym títt úslit</h3>
-          <input type='text' name='name' id='name' className= 'App-input-box' maxLength={20} placeholder='Skriva títt navn her' />
-          <input type="submit"  value="Goym" className='App-button' />
-          
-          <ScoreList />
           <AddScoreEntryForm />
+          <ScoreList />
           
           <br />
         </div>

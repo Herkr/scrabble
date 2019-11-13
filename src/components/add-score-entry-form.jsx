@@ -1,7 +1,11 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import firebase from '../scrabble/Firebase';
+import UserContext from '../scrabble/UserContext';
 
 const AddScoreEntryForm = () => {
+    //context state frá App.js
+    const scoreContext = useContext(UserContext);
+
     const [name, setName] = useState('');
     const [score, setScore] = useState('');
 
@@ -13,7 +17,7 @@ const AddScoreEntryForm = () => {
         .collection('data')
         .add({
             name,
-            score: parseInt(score)
+            score: parseInt(scoreContext)
         })
         .then(() => {
             setName('')
@@ -23,16 +27,9 @@ const AddScoreEntryForm = () => {
 
     return (
         <form onSubmit={onSubmit}>
-            <h4>add score</h4>
-            <div>
-                <label>Name</label>
-                <input type='text' value={name} onChange={e => setName(e.currentTarget.value)} />
-            </div>
-            <div>
-                <label>Score</label>
-                <input type="number" value={score} onChange={e => setScore(e.currentTarget.value)} />
-            </div>
-            <button>Add</button>
+            <input type='text' value={name} onChange={e => setName(e.currentTarget.value)} className= 'App-input-box' maxLength={20} placeholder='Skriva títt navn her' />
+            <input type="hidden" value={score} onChange={e => setScore(e.currentTarget.value)} className= 'App-input-box' placeholder='Skriva score her' />
+            <input type="submit"  value="Goym" className='App-button' />
         </form>
     )
 }

@@ -64,5 +64,18 @@
 }
 
 .App-score {
-  color: #8f86eb
+  color: #8f86eb;
 } 
+
+table {
+  width: 400px;
+}
+
+thead {
+  background-color: #8f86eb;
+}
+
+tbody {
+  background-color: #b9b3f7;
+  border: 1px solid black;
+}
