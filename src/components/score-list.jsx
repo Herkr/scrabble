@@ -1,21 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import firebase from '../scrabble/Firebase';
 
-const SORT_OPTIONS = {
-    'SCORE_DESC': {column: 'score', direction: 'desc'},
-    'SCORE_ASC': {column: 'score', direction: 'asc'}
-
-    
-}
-
-function useScore(sortBy = 'SCORE_DESC') {
+function useScore() {
     const [scores, setScores] = useState([]);
 
     useEffect(() => {
         const unsubscribe = firebase
         .firestore()
         .collection('data')
-        .orderBy(SORT_OPTIONS[sortBy].column, SORT_OPTIONS[sortBy].direction)
+        .orderBy('score','desc')
+        .limit(10)
         .onSnapshot((snapshot) => {
             const newScores = snapshot.docs.map((doc) => ({
                 id: doc.id,
@@ -24,27 +18,20 @@ function useScore(sortBy = 'SCORE_DESC') {
             setScores(newScores);
         })
         return () => unsubscribe()
-    }, [sortBy])
+    }, [])
     return scores;
 }
 
 const ScoreList = () => {
-    const [sortBy, setSortBy] = useState('SCORE_DESC');
-    const scores = useScore(sortBy);
+    const scores = useScore([]);
+    var count = 1;
 
     return (
         <div>
-            <h2 className='App-score'>Top 10 list</h2>
-            <div>
-                <label>Sort By:</label> {' '}
-                <select value={sortBy} onChange={e => setSortBy(e.currentTarget.value)}>
-                    <option value='SCORE_DESC'>score (most)</option>
-                    <option value='SCORE_ASC'>score (least)</option>
-                </select>
-            </div>
             <table>
                 <thead>
                     <tr>
+                        <td>#</td>
                         <td>Name</td>
                         <td>Score</td>
                     </tr>
@@ -52,6 +39,7 @@ const ScoreList = () => {
                 <tbody>
                     {scores.map((s) =>
                     <tr key={s.id}>
+                        <td>{count++}</td>
                         <td>{s.name}</td>
                         <td>{s.score} stig</td>
                     </tr>

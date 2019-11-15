@@ -40,7 +40,7 @@ function Scrabble() {
       {
         // if a letter from input word isn't in randomword
         // output alert
-        return alert(inputWord + ' er ikki galdandi. Royn eitt annað orð.' + newRandomWord + ' / ' + randomWord);
+        return alert(inputWord + ' er ikki galdandi. Royn eitt annað orð.');
       }
     }
     return setWord(inputWord + ' ' + word);

@@ -11,14 +11,14 @@ function TopList() {
     return (
       <div className="App">
       <header className="App-header-list">
-          <br />
-          <h3>Tú hevur fingið {score} stig</h3>
-          <h4>Skriva títt navn niðanfyri og goym títt úrslit</h4>
+          <h3>Tú hevur fingið {score} stig!</h3>
+          <h5>Skriva títt navn niðanfyri og goym títt úrslit</h5>
 
           <AddScoreEntryForm />
-          <ScoreList />
-          
           <br />
+          <ScoreList />
+          <br />
+
           </header>
         </div>
     );
