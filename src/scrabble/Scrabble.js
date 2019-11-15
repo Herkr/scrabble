@@ -26,7 +26,25 @@ function Scrabble() {
   // localstorage
   const wordArray = () => window.localStorage.getItem('word') || '';
   const [word, setWord] = useState(wordArray);
-  const addWord = () => setWord(document.getElementById('word').value.toLowerCase() + ' ' + word);
+  const addWord = () => {
+    var newRandomWord = randomWord;
+    var inputWord = document.getElementById('word').value.toLowerCase();
+    
+    // check if letter in input word is in the random word
+    for (let j = inputWord.length -1; j >= 0; j--) {
+      if(newRandomWord.includes(inputWord[j]))
+      {
+        newRandomWord = removeItem(newRandomWord, inputWord[j])
+      }
+      else
+      {
+        // if a letter from input word isn't in randomword
+        // output alert
+        return alert(inputWord + ' er ikki galdandi. Royn eitt annað orð.' + newRandomWord + ' / ' + randomWord);
+      }
+    }
+    return setWord(inputWord + ' ' + word);
+  }
 
   //context state frá App.js
   const level = useContext(UserContext);
@@ -55,7 +73,6 @@ function Scrabble() {
         <div>
           <br />
           <h1 className='App-score'>Stig: {score} | Orð: {countTrueWords()}</h1>
-
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autocomplete="off" onKeyPress={(event) => restrictKey(event)} />
           <input type="submit" onClick={(event) =>{ addWord();}} value="Leita" className='App-button' />
 
@@ -80,6 +97,15 @@ function Scrabble() {
         </div>
       </Router>
     );
+}
+
+function removeItem(randomWord,item) {
+  for (let i = randomWord.length -1; i >= 0; i--) {
+    if(item.includes(randomWord[i]))
+    {
+      return randomWord.slice(0,i) + randomWord.slice(i+1,randomWord.length);
+    }
+  }
 }
 
 function getArrayOfTrueWords(string){

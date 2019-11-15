@@ -13,7 +13,7 @@ function TopList() {
       <header className="App-header-list">
           <br />
           <h3>Tú hevur fingið {score} stig</h3>
-          <h4>Skriva títt navn niðanfyri og goym títt úslit</h4>
+          <h4>Skriva títt navn niðanfyri og goym títt úrslit</h4>
 
           <AddScoreEntryForm />
           <ScoreList />
