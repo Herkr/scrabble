@@ -41,7 +41,7 @@ const ScoreList = () => {
                     <tr key={s.id}>
                         <td>{count++}</td>
                         <td>{s.name}</td>
-                        <td>{s.score} stig</td>
+                        <td>{s.score}</td>
                     </tr>
                     )}
                 </tbody>
