@@ -10,15 +10,11 @@ function TopList() {
   //context state frá App.js
   const score = useContext(UserContext)[0];
   const totalScore = () => {
-    
     if (numberOfMissingWords === 0)
     {
       return score + 100;
     }
-    else
-    { 
-      return score;
-    }
+    return score;
   }
   
   const randomLetters = useContext(UserContext)[1];
@@ -40,7 +36,7 @@ function TopList() {
         
         <ScoreList />
         
-        <button className="App-button" onClick={()=>{ alert(missingW); }}>Onnur orð</button>
+        <button className="App-button" onClick={()=>{ alert(missingW.join(', ')); }}>Onnur orð</button>
         <br />
       </header>
       <br />
@@ -51,20 +47,17 @@ function TopList() {
 function alertAllFound(numberMissingwords) {
   if (numberMissingwords === 0)
   {
-    
-
     return (
       <div class="App-greenAlert">
         Tú hevur funnið øll orðini! Tú fært 100 eyka stig
       </div>
     );
   }
-return "Tú hevur manglaði " + numberMissingwords + " orð";
+  return "Tú hevur manglaði " + numberMissingwords + " orð";
 }
 
 function missingWords(trueWordsInserted, rand) {
   const missing = [];
-
   const trueCombinations = allTrueComb(rand);
   
   for (let i = trueCombinations.length -1; i >= 0; i--) {
