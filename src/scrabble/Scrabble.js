@@ -1,17 +1,20 @@
 import React, { useContext, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import TopList from './TopList';
-import Dictionary from '../json/Dictionary.json';
+import Dictionary from '../json/Dictionary-seven.json';
 import Alphabet from './Alphabet';
 import UserContext from './UserContext';
 import { UserProvider } from './UserContext';
+import isWordInDirectory from './IsWordInDirectory';
 
 function Scrabble() {
 
+  // sortera orðini av nýggjum json array
+  // hjálpitabell a,á,b,d index
 
   const restrictKey = event => {
     var newRandomWord = [];
-    newRandomWord = randomWord;
+    newRandomWord = randomLetters;
 
     for (let i = newRandomWord.length -1; i >= 0; i--) {
       if (event.key === newRandomWord[i] || event.key.toUpperCase() === newRandomWord[i].toUpperCase())
@@ -27,7 +30,7 @@ function Scrabble() {
   const wordArray = () => window.localStorage.getItem('word') || '';
   const [word, setWord] = useState(wordArray);
   const addWord = () => {
-    var newRandomWord = randomWord;
+    var newRandomWord = randomLetters;
     var inputWord = document.getElementById('word').value.toLowerCase();
     
     // check if letter in input word is in the random word
@@ -50,23 +53,21 @@ function Scrabble() {
   const level = useContext(UserContext);
 
   // get the tiles to show on screen
-  var randomWordBefore = getShuffledWordFromDictionary(level);
-  const [randomWord, setRandomWord] = useState(randomWordBefore);
-  var randomLettersBefore = ShuffleWord(randomWord);
+  var randomLettersBefore = ShuffleWord(getShuffledWordFromDictionary(level));
   const [randomLetters, setRandomLetters] = useState(randomLettersBefore);
   var tiles = getTiles(randomLetters); 
 
   // array with the true words from the dictionary
-  var trueWords = getArrayOfTrueWords(word)
+  var trueWordsInserted = getArrayOfTrueWords(word)
   const countTrueWords = () => {
-    if(trueWords.length !== 0)
+    if(trueWordsInserted.length !== 0)
     {
-      return trueWords.split(',').length;
+      return trueWordsInserted.length;
     }
     return 0;
   }
-
-  const score = getScoreForWord(trueWords);
+  
+  const score = totalScore(trueWordsInserted);
 
   return (
       <Router>
@@ -78,18 +79,16 @@ function Scrabble() {
 
           <h3>Finn so nógv orð sum gjørligt burturúr bókstavunum niðanfyri</h3>
 
-          <h2>{e => setRandomWord(e.target.value)}</h2>
           <h2>{e => setRandomLetters(e.target.value)}</h2>
           <p>{tiles}</p>
           <h2>{showAlert(word.substr(0,word.indexOf(' ')))}</h2>
 
-          <h2>funnin orð: {trueWords}</h2>
-          
+          <h2>funnin orð: {trueWordsInserted.join(', ')}</h2>
+
           <button className="App-button"><Link to={'/scrabble/toplist'} className="App-link">Eg gevi upp</Link></button>
-          <button className="App-button" onClick={()=>{ alert(' missing words'); }}>Onnur orð</button>
           
           <Switch>
-            <UserProvider value={score}>
+            <UserProvider value={[score, randomLetters, trueWordsInserted]}>
               <Route exact path='/scrabble/toplist' component={TopList} />
             </UserProvider>
           </Switch>
@@ -97,6 +96,15 @@ function Scrabble() {
         </div>
       </Router>
     );
+}
+
+function totalScore(foundWords) {
+  var score = 0;
+
+  for (let i = foundWords.length -1; i >= 0; i--) {
+    score = score + getScoreForWord(foundWords[i]);
+  }
+  return score;
 }
 
 function removeItem(randomWord,item) {
@@ -129,7 +137,7 @@ function getArrayOfTrueWords(string){
         }
       }
   }
-  return items.toString();
+  return items;
 }
 
 function  getScoreForWord(word) {
@@ -165,23 +173,6 @@ function showAlert(word)
         </div>
       );
     }
-  }
-  return;
-}
-
-function isWordInDirectory(word) {
-  // array of all the words from the dictionary
-  var wordsFromDictionary = Object.keys(Dictionary);
-
-  if(word.length !== 0)
-  {
-    for (let i = wordsFromDictionary.length - 1; i >= 0; i--) {
-      if(wordsFromDictionary[i] === word)
-      {
-        return true;
-      }
-    }
-    return false;
   }
   return;
 }

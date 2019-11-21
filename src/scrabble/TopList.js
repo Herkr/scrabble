@@ -2,26 +2,102 @@ import React, { useContext } from 'react';
 import ScoreList from '../components/score-list';
 import AddScoreEntryForm from '../components/add-score-entry-form';
 import UserContext from './UserContext';
+import isWordInDirectory from './IsWordInDirectory';
+import { UserProvider } from './UserContext';
 
 function TopList() {
 
   //context state frá App.js
-  const score = useContext(UserContext);
+  const score = useContext(UserContext)[0];
+  const totalScore = () => {
+    
+    if (numberOfMissingWords === 0)
+    {
+      return score + 100;
+    }
+    else
+    { 
+      return score;
+    }
+  }
   
-    return (
-      <div className="App">
+  const randomLetters = useContext(UserContext)[1];
+  const trueWordsInserted = useContext(UserContext)[2];
+
+  const missingW = missingWords(trueWordsInserted, randomLetters)
+  const numberOfMissingWords = missingW.length;
+  
+  return (
+    <div className="App">
       <header className="App-header-list">
-          <h3>Tú hevur fingið {score} stig!</h3>
-          <h5>Skriva títt navn niðanfyri og goym títt úrslit</h5>
+        <h3 className='App-score'>Tú hevur fingið {totalScore()} stig!</h3>
+        <h5>{alertAllFound(numberOfMissingWords)}</h5>
+        <h5>Skriva títt navn niðanfyri og goym títt úrslit</h5>
 
+        <UserProvider value={totalScore()}>
           <AddScoreEntryForm />
-          <br />
-          <ScoreList />
-          <br />
-
-          </header>
-        </div>
-    );
+        </UserProvider>
+        
+        <ScoreList />
+        
+        <button className="App-button" onClick={()=>{ alert(missingW); }}>Onnur orð</button>
+        <br />
+      </header>
+      <br />
+    </div>
+  );
 }
+
+function alertAllFound(numberMissingwords) {
+  if (numberMissingwords === 0)
+  {
+    
+
+    return (
+      <div class="App-greenAlert">
+        Tú hevur funnið øll orðini! Tú fært 100 eyka stig
+      </div>
+    );
+  }
+return "Tú hevur manglaði " + numberMissingwords + " orð";
+}
+
+function missingWords(trueWordsInserted, rand) {
+  const missing = [];
+
+  const trueCombinations = allTrueComb(rand);
+  
+  for (let i = trueCombinations.length -1; i >= 0; i--) {
+    if(!trueWordsInserted.includes(trueCombinations[i]))
+    {
+      missing.push(trueCombinations[i]);
+    }
+  }
+  return missing;
+}
+
+function allTrueComb(word) {
+  var comb = allCombinations(word);
+  var trueArray = [];
+
+  for (let i = comb.length -1; i >= 0; i--) {
+    if(isWordInDirectory(comb[i]) === true)
+    {
+      trueArray.push(comb[i]);
+    }
+  }
+  return trueArray;
+}
+
+const allCombinations = function(word) {
+  var comb = [];
+  if (word.length === 1) return word;
+  for (let i = word.length -1; i >= 0; i--) {
+    allCombinations(word.join('').replace(word[i], '').split('')).concat("").map(function(subtree) {
+      return comb.push([word[i]].concat(subtree));
+    });
+  }
+  return comb.map(function(str) {return str.join('')});
+};
 
 export default TopList;
