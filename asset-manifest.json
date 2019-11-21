@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/scrabble/static/css/main.a03e6841.chunk.css",
-    "main.js": "/scrabble/static/js/main.f1470f04.chunk.js",
-    "main.js.map": "/scrabble/static/js/main.f1470f04.chunk.js.map",
+    "main.js": "/scrabble/static/js/main.45134392.chunk.js",
+    "main.js.map": "/scrabble/static/js/main.45134392.chunk.js.map",
     "runtime-main.js": "/scrabble/static/js/runtime-main.1041cc1a.js",
     "runtime-main.js.map": "/scrabble/static/js/runtime-main.1041cc1a.js.map",
     "static/js/2.b3edd854.chunk.js": "/scrabble/static/js/2.b3edd854.chunk.js",
     "static/js/2.b3edd854.chunk.js.map": "/scrabble/static/js/2.b3edd854.chunk.js.map",
     "index.html": "/scrabble/index.html",
-    "precache-manifest.afb1c4ddcf33c2e15d35146ee04b715a.js": "/scrabble/precache-manifest.afb1c4ddcf33c2e15d35146ee04b715a.js",
+    "precache-manifest.159a0e22c6abaa0cb7a3789ea5e067d2.js": "/scrabble/precache-manifest.159a0e22c6abaa0cb7a3789ea5e067d2.js",
     "service-worker.js": "/scrabble/service-worker.js",
     "static/css/main.a03e6841.chunk.css.map": "/scrabble/static/css/main.a03e6841.chunk.css.map"
   },
@@ -16,6 +16,6 @@
     "static/js/runtime-main.1041cc1a.js",
     "static/js/2.b3edd854.chunk.js",
     "static/css/main.a03e6841.chunk.css",
-    "static/js/main.f1470f04.chunk.js"
+    "static/js/main.45134392.chunk.js"
   ]
 }
