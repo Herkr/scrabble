@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "357215f238a16e4f389a799317ca4e65",
+    "revision": "3a43d578c3fd78163305774dabef6b8b",
     "url": "/scrabble/index.html"
   },
   {
-    "revision": "958c6c0033d35204f4f0",
+    "revision": "4eccf103579013461442",
     "url": "/scrabble/static/css/main.a03e6841.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/scrabble/static/js/2.b3edd854.chunk.js"
   },
   {
-    "revision": "958c6c0033d35204f4f0",
-    "url": "/scrabble/static/js/main.b94b2975.chunk.js"
+    "revision": "4eccf103579013461442",
+    "url": "/scrabble/static/js/main.5f2f6289.chunk.js"
   },
   {
     "revision": "594afff4690c217f8128",
