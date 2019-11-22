@@ -64,7 +64,10 @@ function missingWords(trueWordsInserted, rand) {
   for (let i = trueCombinations.length -1; i >= 0; i--) {
     if(!trueWordsInserted.includes(trueCombinations[i]))
     {
-      missing.push(trueCombinations[i]);
+      if(!missing.includes(trueCombinations[i]))
+      {
+        missing.push(trueCombinations[i]);
+      }
     }
   }
   return missing;
