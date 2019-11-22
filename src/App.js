@@ -16,11 +16,11 @@ function App() {
 
             Orðaspæl  
             <p className="App-header2"> 
-              við føroyskum orðum 
-              <hr/>
-              Vel torleikastig
+            við føroyskum orðum
+            <hr/>
+            Vel torleikastig
             </p>
-          
+            
             <button className="App-button" onClick={()=>setCurrentLevel(level.easy)}><Link to={'/scrabble/easy'} className="App-link"> Fimm bókstavir </Link></button>
             <button className="App-button" onClick={()=>setCurrentLevel(level.medium)}><Link to={'/scrabble/medium'} className="App-link"> Seks bókstavir </Link></button>
             <button className="App-button" onClick={()=>setCurrentLevel(level.hard)}><Link to={'/scrabble/hard'} className="App-link"> Sjey bókstavir </Link></button>

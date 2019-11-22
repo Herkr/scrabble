@@ -9,10 +9,11 @@ function TopList() {
 
   //context state frá App.js
   const score = useContext(UserContext)[0];
+  const level = useContext(UserContext)[3];
   const totalScore = () => {
     if (numberOfMissingWords === 0)
     {
-      return score + 100;
+      return score + level*25;
     }
     return score;
   }
@@ -27,7 +28,7 @@ function TopList() {
     <div className="App">
       <header className="App-header-list">
         <h3 className='App-score'>Tú hevur fingið {totalScore()} stig!</h3>
-        <h5>{alertAllFound(numberOfMissingWords)}</h5>
+        <h5>{alertAllFound(numberOfMissingWords, level)}</h5>
         <h5>Skriva títt navn niðanfyri og goym títt úrslit</h5>
 
         <UserProvider value={totalScore()}>
@@ -44,16 +45,16 @@ function TopList() {
   );
 }
 
-function alertAllFound(numberMissingwords) {
+function alertAllFound(numberMissingwords, level) {
   if (numberMissingwords === 0)
   {
     return (
       <div class="App-greenAlert">
-        Tú hevur funnið øll orðini! Tú fært 100 eyka stig
+        Tú hevur funnið øll orðini! Tú fært {level*25} eyka stig
       </div>
     );
   }
-  return "Tú hevur manglaði " + numberMissingwords + " orð";
+  return "Tú manglaði " + numberMissingwords + " orð";
 }
 
 function missingWords(trueWordsInserted, rand) {

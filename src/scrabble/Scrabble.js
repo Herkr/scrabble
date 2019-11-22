@@ -17,6 +17,13 @@ function Scrabble() {
     newRandomWord = randomLetters;
 
     for (let i = newRandomWord.length -1; i >= 0; i--) {
+      // add word when enter is clicked
+      if(event.key === 'Enter') 
+      {
+        document.getElementById('btn').click();
+        return;
+      }
+      // if key event is part of the random letters
       if (event.key === newRandomWord[i] || event.key.toUpperCase() === newRandomWord[i].toUpperCase())
       {
         return;
@@ -72,23 +79,23 @@ function Scrabble() {
   return (
       <Router>
         <div>
-          <br />
           <h1 className='App-score'>Stig: {score} | Orð: {countTrueWords()}</h1>
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autocomplete="off" onKeyPress={(event) => restrictKey(event)} />
-          <input type="submit" onClick={(event) =>{ addWord();}} value="Leita" className='App-button' />
-
+          <input type="submit" onClick={addWord} value="Leita" id ='btn' className='App-button' />
+          
           <h3>Finn so nógv orð sum gjørligt burturúr bókstavunum niðanfyri</h3>
-
+          
           <h2>{e => setRandomLetters(e.target.value)}</h2>
           <p>{tiles}</p>
           <h2>{showAlert(word.substr(0,word.indexOf(' ')))}</h2>
 
+          <h3>Um øll orðini eru funnin, verða {level*25} eyka stig givin</h3>
           <h2>funnin orð: {trueWordsInserted.join(', ')}</h2>
 
           <button className="App-button"><Link to={'/scrabble/toplist'} className="App-link">Eg gevi upp</Link></button>
           
           <Switch>
-            <UserProvider value={[score, randomLetters, trueWordsInserted]}>
+            <UserProvider value={[score, randomLetters, trueWordsInserted, level]}>
               <Route exact path='/scrabble/toplist' component={TopList} />
             </UserProvider>
           </Switch>
