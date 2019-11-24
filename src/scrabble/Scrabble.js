@@ -33,6 +33,10 @@ function Scrabble() {
     return event.preventDefault();
   }
 
+  const disableInputButton =  () => {
+    document.getElementById("btn").disabled = true;
+  }
+
   // localstorage
   const wordArray = () => window.localStorage.getItem('word') || '';
   const [word, setWord] = useState(wordArray);
@@ -92,7 +96,7 @@ function Scrabble() {
           <h3>Um øll orðini eru funnin, verða {level*25} eyka stig givin</h3>
           <h2>funnin orð: {trueWordsInserted.join(', ')}</h2>
 
-          <button className="App-button"><Link to={'/scrabble/toplist'} className="App-link">Eg gevi upp</Link></button>
+          <button className="App-button" onClick={disableInputButton}><Link to={'/scrabble/toplist'} className="App-link">Eg gevi upp</Link></button>
           
           <Switch>
             <UserProvider value={[score, randomLetters, trueWordsInserted, level]}>

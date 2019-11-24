@@ -7,7 +7,7 @@ import { UserProvider } from './UserContext';
 
 function TopList() {
 
-  //context state frá App.js
+  //context state frá Scrabble.js
   const score = useContext(UserContext)[0];
   const level = useContext(UserContext)[3];
   const totalScore = () => {
@@ -45,6 +45,8 @@ function TopList() {
   );
 }
 
+// if all words are found
+// allert that tells you that you get extra points
 function alertAllFound(numberMissingwords, level) {
   if (numberMissingwords === 0)
   {
@@ -62,8 +64,11 @@ function missingWords(trueWordsInserted, rand) {
   const trueCombinations = allTrueComb(rand);
   
   for (let i = trueCombinations.length -1; i >= 0; i--) {
+    // inserted words that are true 
+    //are not in all of the combinations that can be made
     if(!trueWordsInserted.includes(trueCombinations[i]))
     {
+      // doesn't push the same words multiple times
       if(!missing.includes(trueCombinations[i]))
       {
         missing.push(trueCombinations[i]);
