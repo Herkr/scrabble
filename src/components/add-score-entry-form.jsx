@@ -29,7 +29,7 @@ const AddScoreEntryForm = () => {
         <form onSubmit={onSubmit}>
             <input type='text' value={name} onChange={e => setName(e.currentTarget.value)} className= 'App-input-box' maxLength={20} placeholder='Skriva títt navn her' />
             <input type="hidden" value={score} onChange={e => setScore(e.currentTarget.value)} className= 'App-input-box' placeholder='Skriva score her' />
-            <input type="submit"  value="Goym" className='App-button' />
+            <input type="submit" value="Goym" className='App-button' />
         </form>
     )
 }

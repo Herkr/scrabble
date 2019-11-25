@@ -70,6 +70,13 @@
   color: rgb(117, 22, 22);
 }
 
+.App-yellowAlert {
+  font-size: 16px;
+  padding: 16px 32px;
+  background-color: rgb(240, 255, 106);
+  color: rgb(117, 108, 22);
+}
+
 .App-score {
   color: #8f86eb;
 } 

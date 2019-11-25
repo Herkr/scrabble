@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import TopList from './TopList';
 import Dictionary from '../json/Dictionary-seven.json';
-import Alphabet from './Alphabet';
+import Alphabet from '../components/Alphabet';
 import UserContext from './UserContext';
 import { UserProvider } from './UserContext';
-import isWordInDirectory from './IsWordInDirectory';
+import IsWordInDirectory from '../components/IsWordInDirectory';
+import IsMultipleInArray from '../components/IsMultipleInArray';
 
 function Scrabble() {
 
@@ -69,7 +70,7 @@ function Scrabble() {
   var tiles = getTiles(randomLetters); 
 
   // array with the true words from the dictionary
-  var trueWordsInserted = getArrayOfTrueWords(word)
+  const trueWordsInserted = getArrayOfTrueWords(word)
   const countTrueWords = () => {
     if(trueWordsInserted.length !== 0)
     {
@@ -77,6 +78,43 @@ function Scrabble() {
     }
     return 0;
   }
+
+  var yellowWords = getAllInputItems(word);
+
+  function showAlert(word)
+{
+  if (word.length !== 0)
+  {
+    if (IsWordInDirectory(word) === true)
+    {
+      if (IsMultipleInArray(yellowWords, word) === false)
+      {
+        return (
+          <div class="App-greenAlert">
+            "{word}" funnið! Tú hevur fingið {getScoreForWord(word)} stig :)
+          </div>
+        );
+      }
+      else
+      {
+        return (
+          <div class="App-yellowAlert">
+            "{word}" er longu funnið
+          </div>
+        );
+      }
+    }
+    else
+    {
+      return (
+        <div class="App-redAlert">
+          "{word}" ikki funnið!
+        </div>
+      );
+    }
+  }
+  return;
+}
   
   const score = totalScore(trueWordsInserted);
 
@@ -127,20 +165,25 @@ function removeItem(randomWord,item) {
   }
 }
 
-function getArrayOfTrueWords(string){
+function getAllInputItems(string) {
   var allItems = [];
-  var items = [];
 
   // put all items in an array
   for (let i = string.toString().split(' ').length; i >= 0; i--)
   {
     allItems = string.split(' ', string.toString().split(' ').length -1);
   }
+  return allItems;
+}
+
+function getArrayOfTrueWords(string){
+  var allItems = getAllInputItems(string);
+  var items = [];
   
   for(let i = allItems.length - 1; i >= 0; i--)
   {
     // if word is in directory
-      if(isWordInDirectory(allItems[i]) === true)
+      if(IsWordInDirectory(allItems[i]) === true)
       {
         if(!items.includes(allItems[i]))
         {
@@ -162,30 +205,6 @@ function  getScoreForWord(word) {
       } 
   }
     return score;
-}
-
-function showAlert(word)
-{
-  if (word.length !== 0)
-  {
-    if (isWordInDirectory(word) === true)
-    {
-      return (
-        <div class="App-greenAlert">
-          "{word}" funnið! Tú hevur fingið {getScoreForWord(word)} stig :)
-        </div>
-      );
-    }
-    else
-    {
-      return (
-        <div class="App-redAlert">
-          "{word}" ikki funnið!
-        </div>
-      );
-    }
-  }
-  return;
 }
 
 function getTiles(shuffledword) {

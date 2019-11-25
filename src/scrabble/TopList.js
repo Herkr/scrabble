@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import ScoreList from '../components/score-list';
 import AddScoreEntryForm from '../components/add-score-entry-form';
 import UserContext from './UserContext';
-import isWordInDirectory from './IsWordInDirectory';
+import isWordInDirectory from '../components/IsWordInDirectory';
 import { UserProvider } from './UserContext';
 
 function TopList() {
@@ -29,6 +29,7 @@ function TopList() {
       <header className="App-header-list">
         <h3 className='App-score'>Tú hevur fingið {totalScore()} stig!</h3>
         <h5>{alertAllFound(numberOfMissingWords, level)}</h5>
+        <h5>Vel eitt annað torleikastig, fyri at byrja eitt nýtt spæl</h5>
         <h5>Skriva títt navn niðanfyri og goym títt úrslit</h5>
 
         <UserProvider value={totalScore()}>
@@ -37,10 +38,9 @@ function TopList() {
         
         <ScoreList />
         
-        <button className="App-button" onClick={()=>{ alert(missingW.join(', ')); }}>Onnur orð</button>
+        <button className="App-button" onClick={()=>{ alert('ONNUR ORÐ: ' + missingW.join(', ')); }}>Onnur orð</button>
         <br />
       </header>
-      <br />
     </div>
   );
 }

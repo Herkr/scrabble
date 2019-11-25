@@ -1,4 +1,4 @@
-import Scrabble from './Scrabble';
+import Scrabble from '../scrabble/Scrabble';
 
 function allTrueComb(word) {
   var comb = allCombinations(word);

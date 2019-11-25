@@ -28,7 +28,7 @@ const ScoreList = () => {
 
     return (
         <div>
-            <table>
+            <table align='center'>
                 <thead>
                     <tr>
                         <td>#</td>
