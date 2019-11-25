@@ -7,11 +7,23 @@ import UserContext from './UserContext';
 import { UserProvider } from './UserContext';
 import IsWordInDirectory from '../components/IsWordInDirectory';
 import IsMultipleInArray from '../components/IsMultipleInArray';
+import 'font-awesome/css/font-awesome.min.css';
 
 function Scrabble() {
 
   // sortera orðini av nýggjum json array
   // hjálpitabell a,á,b,d index
+
+  const [loading, setLoading] = useState(false);
+  const isLoading = () => {
+    setLoading(true);
+    // wait 0,5 sek to actually click and go to top 10 list
+    setTimeout(() => {
+      document.getElementById('btn3').click();
+      setLoading(false);
+    }, 500);
+    
+  }
 
   const restrictKey = event => {
     var newRandomWord = [];
@@ -134,7 +146,13 @@ function Scrabble() {
           <h3>Um øll orðini eru funnin, verða {level*25} eyka stig givin</h3>
           <h2>funnin orð: {trueWordsInserted.join(', ')}</h2>
 
-          <button className="App-button" onClick={disableInputButton}><Link to={'/scrabble/toplist'} className="App-link">Eg gevi upp</Link></button>
+          <button className="App-button" disabled={loading} onMouseDown={isLoading}><Link to={'/scrabble/toplist'} className="App-link" id='btn3' onClick={() => {disableInputButton()}}>
+            {loading && (
+            <i className="fa fa-spinner fa-spin"></i>
+            )}
+            {loading && <span>Innlesur</span>}
+            {!loading && <span>Eg gevi upp</span>}
+          </Link></button>
           
           <Switch>
             <UserProvider value={[score, randomLetters, trueWordsInserted, level]}>

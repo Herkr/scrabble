@@ -6,7 +6,9 @@
   "dependencies": {
     "firebase": "^7.3.0",
     "fixed-data-table": "^0.6.5",
+    "font-awesome": "^4.7.0",
     "gh-pages": "^2.1.1",
+    "ldbutton": "^1.0.2",
     "react": "^16.11.0",
     "react-bootstrap-table": "^4.3.1",
     "react-bootstrap-table-next": "^3.3.0",

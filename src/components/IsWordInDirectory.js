@@ -6,7 +6,6 @@ function isWordInDirectory(word) {
 
     // a, á, æ
 
-  
     if(word.length !== 0)
     {
       if(word.charAt(0) === 'a' || word.charAt(0) === 'á' || word.charAt(0) === 'æ')
