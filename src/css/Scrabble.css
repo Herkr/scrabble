@@ -43,6 +43,10 @@
   background-color: #8f86eb;
 }
 
+.App-button:disabled {
+  color: #ada8ec;
+}
+
 .App-link {
   text-decoration: none;
   margin: 4px 2px;
