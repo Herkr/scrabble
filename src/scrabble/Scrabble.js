@@ -12,16 +12,16 @@ import 'font-awesome/css/font-awesome.min.css';
 function Scrabble() {
 
   // sortera orðini av nýggjum json array
-  // hjálpitabell a,á,b,d index
 
   const [loading, setLoading] = useState(false);
   const isLoading = () => {
     setLoading(true);
-    // wait 0,5 sek to actually click and go to top 10 list
+    // wait 0,7 sek to actually click and go to top 10 list
+    // to get 'loading' visible before button is clicked
     setTimeout(() => {
       document.getElementById('btn3').click();
       setLoading(false);
-    }, 500);
+    }, 700);
     
   }
 
@@ -150,7 +150,7 @@ function Scrabble() {
             {loading && (
             <i className="fa fa-spinner fa-spin"></i>
             )}
-            {loading && <span>Innlesur</span>}
+            {loading && <span> Innlesur</span>}
             {!loading && <span>Eg gevi upp</span>}
           </Link></button>
           
