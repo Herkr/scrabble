@@ -12,6 +12,8 @@ import 'font-awesome/css/font-awesome.min.css';
 function Scrabble() {
 
   // sortera orðini av nýggjum json array
+  // isWordInDictionary fixast
+  // Word-combination
 
   const [loading, setLoading] = useState(false);
   const isLoading = () => {
