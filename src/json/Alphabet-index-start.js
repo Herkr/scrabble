@@ -19,6 +19,7 @@ const alphabet =[
     { id:"t", value:64852 },
     { id:["u","ú"], value:69810 },
     { id:"v", value:71576 },
-    { id:["y","ý"], value:74810 }
+    { id:["y","ý"], value:74810 },
+    { id: ["z"], value:75160}
 ]
 export default alphabet;

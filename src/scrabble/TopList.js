@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import ScoreList from '../components/score-list';
 import AddScoreEntryForm from '../components/add-score-entry-form';
 import UserContext from './UserContext';
-import isWordInDirectory from '../components/IsWordInDirectory';
+import trueWordComb from '../components/Word-combinations';
 import { UserProvider } from './UserContext';
 
 function TopList() {
@@ -61,8 +61,8 @@ function alertAllFound(numberMissingwords, level) {
 
 function missingWords(trueWordsInserted, rand) {
   const missing = [];
-  const trueCombinations = allTrueComb(rand);
-  
+  const trueCombinations = trueWordComb(rand);
+
   for (let i = trueCombinations.length -1; i >= 0; i--) {
     // inserted words that are true 
     //are not in all of the combinations that can be made
@@ -77,29 +77,5 @@ function missingWords(trueWordsInserted, rand) {
   }
   return missing;
 }
-
-function allTrueComb(word) {
-  var comb = allCombinations(word);
-  var trueArray = [];
-
-  for (let i = comb.length -1; i >= 0; i--) {
-    if(isWordInDirectory(comb[i]) === true)
-    {
-      trueArray.push(comb[i]);
-    }
-  }
-  return trueArray;
-}
-
-const allCombinations = function(word) {
-  var comb = [];
-  if (word.length === 1) return word;
-  for (let i = word.length -1; i >= 0; i--) {
-    allCombinations(word.join('').replace(word[i], '').split('')).concat("").map(function(subtree) {
-      return comb.push([word[i]].concat(subtree));
-    });
-  }
-  return comb.map(function(str) {return str.join('')});
-};
 
 export default TopList;
