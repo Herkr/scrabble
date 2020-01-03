@@ -4,7 +4,6 @@ import TopList from './TopList';
 import Alphabet from '../components/Alphabet';
 import UserContext from './UserContext';
 import { UserProvider } from './UserContext';
-import IsWordInDirectory from '../components/IsWordInDirectory';
 import IsMultipleInArray from '../components/IsMultipleInArray';
 import removeItem from '../components/RemoveItem';
 import getAllInputItems from '../components/GetAllInputItems';
@@ -16,9 +15,8 @@ import getShuffledWordFromDictionary from '../components/GetShuffledWordFromDict
 import 'font-awesome/css/font-awesome.min.css';
 
 function Scrabble() {
-
   const [loading, setLoading] = useState(false);
-  const isLoading = () => {
+  const isLoadingTrue = () => {
     // disable leita button
     document.getElementById("btn").disabled = true;
     setLoading(true);
@@ -26,9 +24,11 @@ function Scrabble() {
     // to get 'loading' visible before button is clicked
     setTimeout(() => {
       document.getElementById('btn3').click();
-      setLoading(false);
     }, 700);
-    
+  }
+
+  const isLoadingFalse = () => {
+      setLoading(false);
   }
 
   const restrictKey = event => {
@@ -96,11 +96,10 @@ function Scrabble() {
 
   var yellowWords = getAllInputItems(word);
 
-  function showAlert(word)
-{
+  function showAlert(word){
   if (word.length !== 0)
   {
-    if (IsWordInDirectory(word) === true)
+    if (trueWordsInserted.includes(word))
     {
       if (IsMultipleInArray(yellowWords, word) === false)
       {
@@ -148,7 +147,7 @@ function Scrabble() {
           <h3>Um øll orðini eru funnin, verða {level*25} eyka stig givin</h3>
           <h2>funnin orð: {trueWordsInserted.join(', ')}</h2>
 
-          <button className="App-button" disabled={loading} onMouseDown={isLoading}><Link to={'/scrabble/toplist'} className="App-link" id='btn3'>
+          <button className="App-button" disabled={loading} onMouseDown={isLoadingTrue}><Link to={'/scrabble/toplist'} onClick={isLoadingFalse} className="App-link" id='btn3'>
             {loading && (
             <i className="fa fa-spinner fa-spin"></i>
             )}
