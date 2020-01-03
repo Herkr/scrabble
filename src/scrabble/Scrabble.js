@@ -1,20 +1,26 @@
 import React, { useContext, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import TopList from './TopList';
-import Dictionary from '../json/Dictionary-seven.json';
 import Alphabet from '../components/Alphabet';
 import UserContext from './UserContext';
 import { UserProvider } from './UserContext';
 import IsWordInDirectory from '../components/IsWordInDirectory';
 import IsMultipleInArray from '../components/IsMultipleInArray';
+import removeItem from '../components/RemoveItem';
+import getAllInputItems from '../components/GetAllInputItems';
+import getScoreForWord from '../components/GetScoreForWord';
+import totalScore from '../components/TotalScore';
+import shuffleWord from '../components/ShuffleWord';
+import getArrayOfTrueWords from '../components/GetArrayOfTrueWords';
+import getShuffledWordFromDictionary from '../components/GetShuffledWordFromDictionary';
 import 'font-awesome/css/font-awesome.min.css';
 
 function Scrabble() {
 
-  // Word-combination
-
   const [loading, setLoading] = useState(false);
   const isLoading = () => {
+    // disable leita button
+    document.getElementById("btn").disabled = true;
     setLoading(true);
     // wait 0,7 sek to actually click and go to top 10 list
     // to get 'loading' visible before button is clicked
@@ -46,15 +52,12 @@ function Scrabble() {
     return event.preventDefault();
   }
 
-  const disableInputButton =  () => {
-    document.getElementById("btn").disabled = true;
-  }
-
   // localstorage
   const wordArray = () => window.localStorage.getItem('word') || '';
   const [word, setWord] = useState(wordArray);
   const addWord = () => {
     var newRandomWord = randomLetters;
+    setRandomLetters(newRandomWord);
     var inputWord = document.getElementById('word').value.toLowerCase();
     
     // check if letter in input word is in the random word
@@ -67,7 +70,7 @@ function Scrabble() {
       {
         // if a letter from input word isn't in randomword
         // output alert
-        return alert(inputWord + ' er ikki galdandi. Royn eitt annað orð.');
+        return alert(inputWord + ' er ikki galdandi. Hevur tú brúkt ein bókstav oftari enn hann er vístur? \n Royn eitt annað orð.');
       }
     }
     return setWord(inputWord + ' ' + word);
@@ -77,7 +80,7 @@ function Scrabble() {
   const level = useContext(UserContext);
 
   // get the tiles to show on screen
-  var randomLettersBefore = ShuffleWord(getShuffledWordFromDictionary(level));
+  var randomLettersBefore = shuffleWord(getShuffledWordFromDictionary(level));
   const [randomLetters, setRandomLetters] = useState(randomLettersBefore);
   var tiles = getTiles(randomLetters); 
 
@@ -102,7 +105,7 @@ function Scrabble() {
       if (IsMultipleInArray(yellowWords, word) === false)
       {
         return (
-          <div class="App-greenAlert">
+          <div className="App-greenAlert">
             "{word}" funnið! Tú hevur fingið {getScoreForWord(word)} stig :)
           </div>
         );
@@ -110,7 +113,7 @@ function Scrabble() {
       else
       {
         return (
-          <div class="App-yellowAlert">
+          <div className="App-yellowAlert">
             "{word}" er longu funnið
           </div>
         );
@@ -119,7 +122,7 @@ function Scrabble() {
     else
     {
       return (
-        <div class="App-redAlert">
+        <div className="App-redAlert">
           "{word}" ikki funnið!
         </div>
       );
@@ -134,19 +137,18 @@ function Scrabble() {
       <Router>
         <div>
           <h1 className='App-score'>Stig: {score} | Orð: {countTrueWords()}</h1>
-          <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autocomplete="off" onKeyPress={(event) => restrictKey(event)} />
+          <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autoComplete="off" onKeyPress={(event) => restrictKey(event)} />
           <input type="submit" onClick={addWord} value="Leita" id ='btn' className='App-button' />
           
           <h3>Finn so nógv orð sum gjørligt burturúr bókstavunum niðanfyri</h3>
           
-          <h2>{e => setRandomLetters(e.target.value)}</h2>
           <p>{tiles}</p>
           <h2>{showAlert(word.substr(0,word.indexOf(' ')))}</h2>
 
           <h3>Um øll orðini eru funnin, verða {level*25} eyka stig givin</h3>
           <h2>funnin orð: {trueWordsInserted.join(', ')}</h2>
 
-          <button className="App-button" disabled={loading} onMouseDown={isLoading}><Link to={'/scrabble/toplist'} className="App-link" id='btn3' onClick={() => {disableInputButton()}}>
+          <button className="App-button" disabled={loading} onMouseDown={isLoading}><Link to={'/scrabble/toplist'} className="App-link" id='btn3'>
             {loading && (
             <i className="fa fa-spinner fa-spin"></i>
             )}
@@ -165,66 +167,6 @@ function Scrabble() {
     );
 }
 
-function totalScore(foundWords) {
-  var score = 0;
-
-  for (let i = foundWords.length -1; i >= 0; i--) {
-    score = score + getScoreForWord(foundWords[i]);
-  }
-  return score;
-}
-
-function removeItem(randomWord,item) {
-  for (let i = randomWord.length -1; i >= 0; i--) {
-    if(item.includes(randomWord[i]))
-    {
-      return randomWord.slice(0,i) + randomWord.slice(i+1,randomWord.length);
-    }
-  }
-}
-
-function getAllInputItems(string) {
-  var allItems = [];
-
-  // put all items in an array
-  for (let i = string.toString().split(' ').length; i >= 0; i--)
-  {
-    allItems = string.split(' ', string.toString().split(' ').length -1);
-  }
-  return allItems;
-}
-
-function getArrayOfTrueWords(string){
-  var allItems = getAllInputItems(string);
-  var items = [];
-  
-  for(let i = allItems.length - 1; i >= 0; i--)
-  {
-    // if word is in directory
-      if(IsWordInDirectory(allItems[i]) === true)
-      {
-        if(!items.includes(allItems[i]))
-        {
-          items.push(allItems[i]);
-        }
-      }
-  }
-  return items;
-}
-
-function  getScoreForWord(word) {
-  var score = 0;
-    for(let i = word.length - 1; i >= 0; i--) {
-      for(let j = Alphabet.length - 1; j >= 0; j--) {
-        if (word[i] === Alphabet[j].id)
-        {
-          score = score + Number(Alphabet[j].value);
-        }
-      } 
-  }
-    return score;
-}
-
 function getTiles(shuffledword) {
     var items = [];
 
@@ -232,58 +174,12 @@ function getTiles(shuffledword) {
       for(let j = Alphabet.length - 1; j >= 0; j--) {
         if (shuffledword[i] === Alphabet[j].id)
         {
-          items.push(<img src={Alphabet[j].image} alt=""/>);
+          items.push(<img key={i} src={Alphabet[j].image} alt=""/>); 
         }
       }
     }
 
     return items.reverse();
-}
-
-// Richard Durstenfeld shuffle algorithm
-function shuffleArray(array) {
-  for(let i = array.length - 1; i >= 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    let temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-}
-
-// shuffle the letters in a word
-function ShuffleWord(word) {
-  // create array
-  var newWord = word.split('');
-  shuffleArray(newWord);
-
-  /*
-  if(newWord === word)
-  {
-    ShuffleWord(word);
-  }*/
-  return newWord;
-}
-
-// get shuffled word from Dictionary.json with the length 5
-function getShuffledWordFromDictionary(lengthOfWord) {
-  // array of all the words from the dictionary
-  var wordsFromDictionary = Object.keys(Dictionary);
-  // array of all the words with 5 letter
-  var arrayOfNLengthStrings = wordsFromDictionary.filter(word => word.length === lengthOfWord);
-  var shuffledArray = shuffleArray(arrayOfNLengthStrings);
-  // empty array for words with lower case
-  var items = [];
-  // unicode: Á=\u00C1 Ð=\u00D0 Í=\u00CD Ó=\u00D3 Ú=\u00DA Ý=\u00DD Æ=\u00C6 Ø=\u00D8'   
-  var checkChar = /^[A-Z\u00C1\u00D0\u00CD\u00D3\u00DA\u00DD\u00C6\u00D8]/;
-
-  for (let i = shuffledArray.length - 1; i >= 0; i--) {
-    // check if upper case
-    if(checkChar.test(shuffledArray[i]) === false){
-      items.push(shuffledArray[i]);
-    }
-  }
-  return items[0];
 }
 
 export default Scrabble;

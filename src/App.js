@@ -28,7 +28,9 @@ function App() {
             Orðaspæl  
             <p className="App-header2"> 
             við føroyskum orðum
+            </p>
             <hr/>
+            <p>
             Vel torleikastig
             </p>
             
@@ -36,9 +38,8 @@ function App() {
             <button className="App-button" onClick={()=>{setCurrentLevel(level.medium); clickLink6()}}><Link to={'/scrabble/medium'} id='btn6' className="App-link"> Seks bókstavir </Link></button>
             <button className="App-button" onClick={()=>{setCurrentLevel(level.hard); clickLink7()}}><Link to={'/scrabble/hard'} id='btn7' className="App-link"> Sjey bókstavir </Link></button>
           </header>
-
-          <body className="App-body">
-
+          
+          <div className="App-body">
               <Switch>
                 <UserProvider value={currentLevel}>
                   <Route exact path='/scrabble/easy' component={Scrabble} />
@@ -46,8 +47,7 @@ function App() {
                   <Route path='/scrabble/hard' component={Scrabble} />
                 </UserProvider>
               </Switch>
-
-          </body>    
+          </div>    
         </div>
       </Router>
     );

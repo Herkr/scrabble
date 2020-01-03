@@ -1,3 +1,5 @@
+// check if a word is entered more that once
+
 function IsMultipleInArray(array, word) {
     var count= 0;
     for (var i=0; i < array.length; i++){

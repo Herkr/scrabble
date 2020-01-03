@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import ScoreList from '../components/score-list';
 import AddScoreEntryForm from '../components/add-score-entry-form';
 import UserContext from './UserContext';
-import trueWordComb from '../components/Word-combinations';
+import missingWords from '../components/MissingWords';
 import { UserProvider } from './UserContext';
 
 function TopList() {
@@ -23,7 +23,6 @@ function TopList() {
 
   const missingW = missingWords(trueWordsInserted, randomLetters)
   const numberOfMissingWords = missingW.length;
-  
   return (
     <div className="App">
       <header className="App-header-list">
@@ -57,25 +56,6 @@ function alertAllFound(numberMissingwords, level) {
     );
   }
   return "Tú manglaði " + numberMissingwords + " orð";
-}
-
-function missingWords(trueWordsInserted, rand) {
-  const missing = [];
-  const trueCombinations = trueWordComb(rand);
-
-  for (let i = trueCombinations.length -1; i >= 0; i--) {
-    // inserted words that are true 
-    //are not in all of the combinations that can be made
-    if(!trueWordsInserted.includes(trueCombinations[i]))
-    {
-      // doesn't push the same words multiple times
-      if(!missing.includes(trueCombinations[i]))
-      {
-        missing.push(trueCombinations[i]);
-      }
-    }
-  }
-  return missing;
 }
 
 export default TopList;
