@@ -27,7 +27,7 @@ function TopList() {
     <div>
       <header className="App-header-list">
         <h3>Tú hevur fingið {totalScore()} stig!</h3>
-        <h5 className="font-color-yellow">{alertAllFound(numberOfMissingWords, level)}: {missingW.join(', ')}</h5>
+        <h5 className="font-color-yellow">{alertAllFound(numberOfMissingWords, level)} {missingW.join(', ')}</h5>
         <h5>Vel eitt annað torleikastig, fyri at byrja eitt nýtt spæl</h5>
         <h5>Skriva títt navn niðanfyri og goym títt úrslit</h5>
 
@@ -54,7 +54,7 @@ function alertAllFound(numberMissingwords, level) {
       </div>
     );
   }
-  return "Tú manglaði " + numberMissingwords + " orð";
+  return "Tú manglaði " + numberMissingwords + " orð:";
 }
 
 export default TopList;
