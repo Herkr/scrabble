@@ -28,7 +28,8 @@ function Scrabble() {
   }
 
   const isLoadingFalse = () => {
-      setLoading(false);
+    setLoading(false);
+    
   }
 
   const restrictKey = event => {

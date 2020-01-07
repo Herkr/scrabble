@@ -29,7 +29,7 @@ function allCombinations(word) {
   {
     // ABCD
     // 4
-combArray.push("ABCD", "ABC", "ABDC", "ABD", "AB", "ACBD", "ACB", "ACDB", "ACD", "AC", "ADBC", "ADB", "ADCB", "ADC", "AD", "A", "BACD", "BAC", "BADC", "BAD", "BA", "BCAD", "BCA", "BCDA", "BCD", "BC", "BDAC", "BDA", "BDCA", "BDC", "BD", "B", "CABD", "CAB", "CADB", "CAD", "CA", "CBAD", "CBA", "CBDA", "CBD", "CB", "CDAB", "CDA", "CDBA", "CDB", "CD", "C", "DABC", "DAB", "DACB", "DAC", "DA", "DBAC", "DBA", "DBCA", "DBC", "DB", "DCAB", "DCA", "DCBA", "DCB", "DC", "D");
+    combArray.push("ABCD", "ABC", "ABDC", "ABD", "AB", "ACBD", "ACB", "ACDB", "ACD", "AC", "ADBC", "ADB", "ADCB", "ADC", "AD", "A", "BACD", "BAC", "BADC", "BAD", "BA", "BCAD", "BCA", "BCDA", "BCD", "BC", "BDAC", "BDA", "BDCA", "BDC", "BD", "B", "CABD", "CAB", "CADB", "CAD", "CA", "CBAD", "CBA", "CBDA", "CBD", "CB", "CDAB", "CDA", "CDBA", "CDB", "CD", "C", "DABC", "DAB", "DACB", "DAC", "DA", "DBAC", "DBA", "DBCA", "DBC", "DB", "DCAB", "DCA", "DCBA", "DCB", "DC", "D");
 
     for(let i=0; i<combArray.length; i++)
     {
