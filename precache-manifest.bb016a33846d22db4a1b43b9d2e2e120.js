@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bcc78093c91d564e1efb5bfae11da5eb",
+    "revision": "4b4572ec90661d88b6900d06dea2f96a",
     "url": "/scrabble/index.html"
   },
   {
@@ -8,16 +8,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/scrabble/static/css/2.351d0945.chunk.css"
   },
   {
-    "revision": "11b9e300d79fdc733aa1",
-    "url": "/scrabble/static/css/main.5904a8a9.chunk.css"
+    "revision": "988b933479fe5961c90d",
+    "url": "/scrabble/static/css/main.bdcf0261.chunk.css"
   },
   {
     "revision": "722bd1b1b1a2a4ecafcb",
     "url": "/scrabble/static/js/2.52d07d3d.chunk.js"
   },
   {
-    "revision": "11b9e300d79fdc733aa1",
-    "url": "/scrabble/static/js/main.9b82bba9.chunk.js"
+    "revision": "988b933479fe5961c90d",
+    "url": "/scrabble/static/js/main.9be069b5.chunk.js"
   },
   {
     "revision": "594afff4690c217f8128",
