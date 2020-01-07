@@ -30,7 +30,7 @@ function App() {
             við føroyskum orðum
             </p>
             <hr/>
-            <p>
+            <p className="App-header2">
             Vel torleikastig
             </p>
             

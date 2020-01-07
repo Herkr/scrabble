@@ -143,10 +143,10 @@ function Scrabble() {
           
           <p>{tiles}</p>
           <h2>{showAlert(word.substr(0,word.indexOf(' ')))}</h2>
-
+          
+          <h2 className="font-color-green">funnin orð: {trueWordsInserted.join(', ')}</h2>
           <h3>Um øll orðini eru funnin, verða {level*25} eyka stig givin</h3>
-          <h2>funnin orð: {trueWordsInserted.join(', ')}</h2>
-
+          
           <button className="App-button" disabled={loading} onMouseDown={isLoadingTrue}><Link to={'/scrabble/toplist'} onClick={isLoadingFalse} className="App-link" id='btn3'>
             {loading && (
             <i className="fa fa-spinner fa-spin"></i>

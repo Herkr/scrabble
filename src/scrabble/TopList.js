@@ -24,10 +24,10 @@ function TopList() {
   const missingW = missingWords(trueWordsInserted, randomLetters)
   const numberOfMissingWords = missingW.length;
   return (
-    <div className="App">
+    <div>
       <header className="App-header-list">
-        <h3 className='App-score'>Tú hevur fingið {totalScore()} stig!</h3>
-        <h5>{alertAllFound(numberOfMissingWords, level)}</h5>
+        <h3>Tú hevur fingið {totalScore()} stig!</h3>
+        <h5 className="font-color-yellow">{alertAllFound(numberOfMissingWords, level)}: {missingW.join(', ')}</h5>
         <h5>Vel eitt annað torleikastig, fyri at byrja eitt nýtt spæl</h5>
         <h5>Skriva títt navn niðanfyri og goym títt úrslit</h5>
 
@@ -37,7 +37,6 @@ function TopList() {
         
         <ScoreList />
         
-        <button className="App-button" onClick={()=>{ alert('ONNUR ORÐ: ' + missingW.join(', ')); }}>Onnur orð</button>
         <br />
       </header>
     </div>
