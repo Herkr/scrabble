@@ -3,8 +3,11 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Scrabble from './scrabble/Scrabble';
 import { UserProvider } from './scrabble/UserContext';
 import "./css/Scrabble.css";
+import ReactGA from './components/ReactGA';
 
 function App() {
+  // google analytics
+  ReactGA();
 
 //context state
   const level = { easy: 4, medium: 5, hard: 6};
