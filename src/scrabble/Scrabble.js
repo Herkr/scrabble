@@ -66,7 +66,8 @@ function Scrabble() {
     var newRandomWord = randomLetters;
     setRandomLetters(newRandomWord);
     var inputWord = document.getElementById('word').value.toLowerCase();
-    
+    // clear input field when 'leita' button pressed
+    document.getElementById('word').value = "";
     // check if letter in input word is in the random word
     for (let j = inputWord.length -1; j >= 0; j--) {
       if(newRandomWord.includes(inputWord[j]))
@@ -92,7 +93,7 @@ function Scrabble() {
   var tiles = getTiles(randomLetters); 
 
   // array with the true words from the dictionary
-  const trueWordsInserted = getArrayOfTrueWords(word)
+  const trueWordsInserted = getArrayOfTrueWords(word);
   const countTrueWords = () => {
     if(trueWordsInserted.length !== 0)
     {
@@ -134,11 +135,12 @@ function Scrabble() {
       );
     }
   }
+  
   return;
 }
-  
-  const score = totalScore(trueWordsInserted);
 
+const score = totalScore(trueWordsInserted);
+  
   return (
       <Router>
         <div>
