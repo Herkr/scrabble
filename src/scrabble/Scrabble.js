@@ -16,20 +16,24 @@ import 'font-awesome/css/font-awesome.min.css';
 
 function Scrabble() {
   const [loading, setLoading] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const isLoadingTrue = () => {
     // disable leita button
     document.getElementById("btn").disabled = true;
+    document.getElementById("btn3").disabled = true;
+    document.getElementById("word").disabled = true;
     setLoading(true);
+    setGameOver(true);
+
     // wait 0,7 sek to actually click and go to top 10 list
     // to get 'loading' visible before button is clicked
     setTimeout(() => {
-      document.getElementById('btn3').click();
+      document.getElementById('link').click();
     }, 700);
   }
 
   const isLoadingFalse = () => {
     setLoading(false);
-    
   }
 
   const restrictKey = event => {
@@ -41,6 +45,8 @@ function Scrabble() {
       if(event.key === 'Enter') 
       {
         document.getElementById('btn').click();
+        // clear input field
+        document.getElementById('word').value = "";
         return;
       }
       // if key event is part of the random letters
@@ -148,12 +154,13 @@ function Scrabble() {
           <h2 className="font-color-green">funnin orð: {trueWordsInserted.join(', ')}</h2>
           <h3>Um øll orðini eru funnin, verða {level*25} eyka stig givin</h3>
           
-          <button className="App-button" disabled={loading} onMouseDown={isLoadingTrue}><Link to={'/scrabble/toplist'} onClick={isLoadingFalse} className="App-link" id='btn3'>
+          <button className="App-button" id="btn3" onMouseDown={isLoadingTrue}><Link to={'/scrabble/toplist'} onClick={isLoadingFalse} className="App-link" id='link'>
             {loading && (
             <i className="fa fa-spinner fa-spin"></i>
             )}
             {loading && <span> Innlesur</span>}
-            {!loading && <span>Eg gevi upp</span>}
+            {!loading && !gameOver && <span>Eg gevi upp</span>}
+            {!loading && gameOver}
           </Link></button>
           
           <Switch>

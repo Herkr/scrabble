@@ -49,7 +49,7 @@ function alertAllFound(numberMissingwords, level) {
   if (numberMissingwords === 0)
   {
     return (
-      <div class="App-greenAlert">
+      <div className="App-greenAlert">
         Tú hevur funnið øll orðini! Tú fært {level*25} eyka stig
       </div>
     );
