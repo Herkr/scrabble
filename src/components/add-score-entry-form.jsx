@@ -16,22 +16,26 @@ const AddScoreEntryForm = () => {
     function onSubmit(e) {
         e.preventDefault();
 
-        firebase
-        .firestore()
-        .collection('data')
-        .add({
-            name,
-            score: parseInt(scoreContext)
-        })
-        .then(() => {
-            setName('')
-            setScore('')
-        })
+        // only save name in database if some name is written
+        if(document.getElementById("scoreName").value !== "")
+        {
+            firebase
+            .firestore()
+            .collection('data')
+            .add({
+                name,
+                score: parseInt(scoreContext)
+            })
+            .then(() => {
+                setName('')
+                setScore('')
+            })
 
-        // button disabled
-        // only save name once
-        document.getElementById("scoreName").disabled = true;
-        setDisab(true);
+            // button disabled
+            // only save name once
+            document.getElementById("scoreName").disabled = true;
+            setDisab(true);
+        }
     }
 
     return (

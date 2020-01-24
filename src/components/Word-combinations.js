@@ -4,14 +4,12 @@ function allTrueComb(word) {
   var comb = allCombinations(word);
   var trueArray = [];
 
-  console.time('time');
   for (let i = comb.length -1; i >= 0; i--) {
     if(isWordInDirectory(comb[i]) === true)
     {
       trueArray.push(comb[i]);
     }
   }
-  console.timeEnd('time');
   return trueArray;
 }
 
@@ -48,8 +46,6 @@ function allCombinations(word) {
       replacedD.push(replacedC[i].toString().replace('D', word[3]));
     }
 
-    console.log(replacedD);
-
     return replacedD;
   }
   if(word.length === 5)
@@ -78,8 +74,6 @@ function allCombinations(word) {
     {
       replacedE.push(replacedD[i].toString().replace('E', word[4]));
     }
-    
-    console.log(replacedE);
 
     return replacedE;
   }
@@ -114,8 +108,6 @@ function allCombinations(word) {
     {
       replacedF.push(replacedE[i].toString().replace('F', word[5]));
     }
-
-    console.log(replacedF);
 
     return replacedF;
   }
