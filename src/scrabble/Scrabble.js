@@ -13,6 +13,7 @@ import shuffleWord from '../components/ShuffleWord';
 import getArrayOfTrueWords from '../components/GetArrayOfTrueWords';
 import getShuffledWordFromDictionary from '../components/GetShuffledWordFromDictionary';
 import 'font-awesome/css/font-awesome.min.css';
+import getArrayOfFalseWords from '../components/GetArrayOfFalseWords';
 
 function Scrabble() {
   const [loading, setLoading] = useState(false);
@@ -94,6 +95,7 @@ function Scrabble() {
 
   // array with the true words from the dictionary
   const trueWordsInserted = getArrayOfTrueWords(word);
+  const falseWordsInserted = getArrayOfFalseWords(word);
   const countTrueWords = () => {
     if(trueWordsInserted.length !== 0)
     {
@@ -130,7 +132,7 @@ function Scrabble() {
     {
       return (
         <div className="App-redAlert">
-          "{word}" ikki funnið!
+          "{word}" ikki funnið! Tú missur 1 stig :(
         </div>
       );
     }
@@ -139,7 +141,7 @@ function Scrabble() {
   return;
 }
 
-const score = totalScore(trueWordsInserted);
+const score = totalScore(trueWordsInserted, falseWordsInserted);
   
   return (
       <Router>
