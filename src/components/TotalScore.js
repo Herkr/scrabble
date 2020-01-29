@@ -2,14 +2,21 @@
 
 import getScoreForWord from './GetScoreForWord';
 
-function totalScore(foundWords, falseWords) {
+function totalScore(foundWords) {
     var score = 0;
-  
+
     for (let i = foundWords.length -1; i >= 0; i--) {
-      score = score + getScoreForWord(foundWords[i]);
-      console.log(falseWords + " Found: " + foundWords + " Stig: " + getScoreForWord(foundWords));
+      let scoreForWord = getScoreForWord(foundWords[i]);
+      if(scoreForWord !== 0)
+      {
+        score = score + scoreForWord;
+      }
+      else if(score > 0 && scoreForWord === 0)
+      {
+        score = score - 1;
+      }
     }
-    return score - falseWords.length;
+    return score;
   }
 
   export default totalScore;

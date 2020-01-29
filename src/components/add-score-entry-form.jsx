@@ -33,8 +33,9 @@ const AddScoreEntryForm = () => {
 
             // button disabled
             // only save name once
-            document.getElementById("scoreName").disabled = true;
             setDisab(true);
+            // disable input field
+            document.getElementById("scoreName").disabled = true;
         }
     }
 
