@@ -37,51 +37,18 @@ function Scrabble() {
     setLoading(false);
   }
 
-  const restrictKey = event => {
-    var newRandomWord = [];
-    newRandomWord = randomLetters;
-
-    for (let i = newRandomWord.length -1; i >= 0; i--) {
-      // add word when enter is clicked
-      if(event.key === 'Enter') 
-      {
-        document.getElementById('btn').click();
-        // clear input field
-        document.getElementById('word').value = "";
-        return;
-      }
-      // if key event is part of the random letters
-      if (event.key === newRandomWord[i] || event.key.toUpperCase() === newRandomWord[i].toUpperCase())
-      {
-        return;
-      }
-    }
-    // no letter is written in textbox
-    return event.preventDefault();
-  }
-
   // localstorage
   const wordArray = () => window.localStorage.getItem('word') || '';
   const [word, setWord] = useState(wordArray);
   const addWord = () => {
+    // to keep the random word from not changing
     var newRandomWord = randomLetters;
     setRandomLetters(newRandomWord);
+    setLettersToUse(newRandomWord);
     var inputWord = document.getElementById('word').value.toLowerCase();
     // clear input field when 'leita' button pressed
     document.getElementById('word').value = "";
-    // check if letter in input word is in the random word
-    for (let j = inputWord.length -1; j >= 0; j--) {
-      if(newRandomWord.includes(inputWord[j]))
-      {
-        newRandomWord = removeItem(newRandomWord, inputWord[j])
-      }
-      else
-      {
-        // if a letter from input word isn't in randomword
-        // output alert
-        return alert(inputWord + ' er ikki galdandi. Hevur tú brúkt ein bókstav oftari enn hann er vístur? \n Royn eitt annað orð.');
-      }
-    }
+    
     return setWord(inputWord + ' ' + word);
   }
 
@@ -102,6 +69,41 @@ function Scrabble() {
       return trueWordsInserted.length;
     }
     return 0;
+  }
+
+  // if same letter is written multiple times
+  const [lettersToUse, setLettersToUse] = useState(randomLetters);
+  
+  const restrictKey = event => {
+    var newRandomWord = [];
+    newRandomWord = randomLetters;
+    var inputW = document.getElementById('word').value;
+    for (let i = newRandomWord.length -1; i >= 0; i--) {
+      // add word when enter is clicked
+      if(event.key === 'Enter') 
+      {
+        document.getElementById('btn').click();
+        // clear input field
+        document.getElementById('word').value = "";
+        return;
+      }
+      // if key event is part of the random letters
+      if((event.key === newRandomWord[i] || event.key.toUpperCase() === newRandomWord[i].toUpperCase()) && lettersToUse.includes(newRandomWord[i]))
+      {
+        setLettersToUse(removeItem(lettersToUse, newRandomWord[i]));
+        return;
+      }
+    }
+
+    // delete letter in lettersToUse when delete pressed
+    if((event.key === 'Delete' || event.key === 'Backspace') && inputW.length > 0)
+    {
+      setLettersToUse(lettersToUse + inputW[inputW.length-1]);
+      return;
+    }
+
+    // no letter is written in textbox
+    return event.preventDefault();
   }
 
   var yellowWords = getAllInputItems(word);
@@ -148,7 +150,7 @@ const score = totalScore(allWordsExceptYellow);
       <Router>
         <div>
           <h1 className='App-score'>Stig: {score} | Orð: {countTrueWords()}</h1>
-          <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autoComplete="off" onKeyPress={(event) => restrictKey(event)} />
+          <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autoComplete="off" onKeyDown={(event) => restrictKey(event)} />
           <input type="submit" onClick={addWord} value="Leita" id ='btn' className='App-button' />
           
           <h3>Finn so nógv orð sum gjørligt burturúr bókstavunum niðanfyri</h3>
