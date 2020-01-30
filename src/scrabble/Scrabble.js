@@ -77,7 +77,8 @@ function Scrabble() {
   const restrictKey = event => {
     var newRandomWord = [];
     newRandomWord = randomLetters;
-    var inputW = document.getElementById('word').value;
+    var inputW = document.getElementById('word').value.toLowerCase();
+    console.log(lettersToUse);
     for (let i = newRandomWord.length -1; i >= 0; i--) {
       // add word when enter is clicked
       if(event.key === 'Enter') 
@@ -143,7 +144,6 @@ function Scrabble() {
   return;
 }
 
-//const score = totalScore(trueWordsInserted, falseWordsInserted);
 const score = totalScore(allWordsExceptYellow);
   
   return (
