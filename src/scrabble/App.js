@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Scrabble from './scrabble/Scrabble';
-import { UserProvider } from './scrabble/UserContext';
-import "./css/Scrabble.css";
-import ReactGA from './components/ReactGA';
+import Scrabble from './Scrabble';
+import { UserProvider } from './UserContext';
+import "../css/Scrabble.css";
+import ReactGA from '../components/ReactGA';
 
 function App() {
   // google analytics
@@ -37,9 +37,15 @@ function App() {
             Vel torleikastig
             </p>
             
-            <button className="App-button" onClick={()=>{setCurrentLevel(level.easy); clickLink4()}}><Link to={'/scrabble/easy'} id='btn4' className="App-link"> Fýra bókstavir </Link></button>
-            <button className="App-button" onClick={()=>{setCurrentLevel(level.medium); clickLink5()}}><Link to={'/scrabble/medium'} id='btn5' className="App-link"> Fimm bókstavir </Link></button>
-            <button className="App-button" onClick={()=>{setCurrentLevel(level.hard); clickLink6()}}><Link to={'/scrabble/hard'} id='btn6' className="App-link"> Seks bókstavir </Link></button>
+            <button className="App-button" onClick={()=>{setCurrentLevel(level.easy); clickLink4()}}>
+              <Link to={'/scrabble/easy'} id='btn4' className="App-link"> Fýra bókstavir </Link>
+            </button>
+            <button className="App-button" onClick={()=>{setCurrentLevel(level.medium); clickLink5()}}>
+              <Link to={'/scrabble/medium'} id='btn5' className="App-link"> Fimm bókstavir </Link>
+            </button>
+            <button className="App-button" onClick={()=>{setCurrentLevel(level.hard); clickLink6()}}>
+              <Link to={'/scrabble/hard'} id='btn6' className="App-link"> Seks bókstavir </Link>
+            </button>
           </header>
           
           <div className="App-body">

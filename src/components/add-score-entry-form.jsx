@@ -7,7 +7,7 @@ const AddScoreEntryForm = () => {
     // disable add name button
     const [disab, setDisab] = useState(false);
 
-    //context state frá App.js
+    //context state frá TopList.js
     const scoreContext = useContext(UserContext);
 
     const [name, setName] = useState('');
@@ -41,8 +41,11 @@ const AddScoreEntryForm = () => {
 
     return (
         <form onSubmit={onSubmit}>
-            <input type='text' value={name} id="scoreName" onChange={e => setName(e.currentTarget.value)} className= 'App-input-box' maxLength={20} placeholder='Skriva títt navn her' autoComplete="off" />
-            <input type="hidden" value={score} onChange={e => setScore(e.currentTarget.value)} className= 'App-input-box' placeholder='Skriva score her' />
+            <input type='text' value={name} id="scoreName" 
+                onChange={e => setName(e.currentTarget.value)} className= 'App-input-box' maxLength={20} 
+                placeholder='Skriva títt navn her' autoComplete="off" />
+            <input type="hidden" value={score} onChange={e => setScore(e.currentTarget.value)} 
+                className= 'App-input-box' placeholder='Skriva score her' />
             <input type="submit" value="Goym" className='App-button' disabled={disab} />
         </form>
     )

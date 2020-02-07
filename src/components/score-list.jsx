@@ -51,15 +51,3 @@ const ScoreList = () => {
 }
 
 export default ScoreList;
-
-/*
-<ol>
-    {scores.map((s) =>
-    <li key={s.id}>
-        <div>
-            {s.name} <code>{s.score} stig</code>
-        </div>
-    </li>
-    )}
-</ol>
-*/

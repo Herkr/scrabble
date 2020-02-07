@@ -10,7 +10,9 @@ function isWordInDirectory(word) {
   {
     for (let i=0; i<AlphabetStarts.length; i++)
     {
-      if(word.charAt(0) === AlphabetStarts[i].id[0] || word.charAt(0) === AlphabetStarts[i].id[1] || word.charAt(0) === AlphabetStarts[i].id[2])
+      if(word.charAt(0) === AlphabetStarts[i].id[0] 
+      || word.charAt(0) === AlphabetStarts[i].id[1] 
+      || word.charAt(0) === AlphabetStarts[i].id[2])
       {
         for (let j = AlphabetStarts[i].value; j < (AlphabetStarts[(i+1)].value)-1; j++) {
           if(wordsFromDictionary[j] === word)

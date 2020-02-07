@@ -37,6 +37,14 @@ function Scrabble() {
     setLoading(false);
   }
 
+  //context state frá App.js
+  const level = useContext(UserContext);
+
+  // get the tiles to show on screen
+  var randomLettersBefore = shuffleWord(getShuffledWordFromDictionary(level));
+  const [randomLetters, setRandomLetters] = useState(randomLettersBefore);
+  var tiles = getTiles(randomLetters); 
+
   // localstorage
   const wordArray = () => window.localStorage.getItem('word') || '';
   const [word, setWord] = useState(wordArray);
@@ -52,25 +60,6 @@ function Scrabble() {
     return setWord(inputWord + ' ' + word);
   }
 
-  //context state frá App.js
-  const level = useContext(UserContext);
-
-  // get the tiles to show on screen
-  var randomLettersBefore = shuffleWord(getShuffledWordFromDictionary(level));
-  const [randomLetters, setRandomLetters] = useState(randomLettersBefore);
-  var tiles = getTiles(randomLetters); 
-
-  // array with the true words from the dictionary
-  const trueWordsInserted = getArrayOfTrueWords(word);
-  const allWordsExceptYellow = getAllExceptYellowWords(word);
-  const countTrueWords = () => {
-    if(trueWordsInserted.length !== 0)
-    {
-      return trueWordsInserted.length;
-    }
-    return 0;
-  }
-
   // if same letter is written multiple times
   const [lettersToUse, setLettersToUse] = useState(randomLetters);
   
@@ -78,7 +67,6 @@ function Scrabble() {
     var newRandomWord = [];
     newRandomWord = randomLetters;
     var inputW = document.getElementById('word').value.toLowerCase();
-    console.log(lettersToUse);
     for (let i = newRandomWord.length -1; i >= 0; i--) {
       // add word when enter is clicked
       if(event.key === 'Enter') 
@@ -89,7 +77,8 @@ function Scrabble() {
         return;
       }
       // if key event is part of the random letters
-      if((event.key === newRandomWord[i] || event.key.toUpperCase() === newRandomWord[i].toUpperCase()) && lettersToUse.includes(newRandomWord[i]))
+      if((event.key === newRandomWord[i] || event.key.toUpperCase() === newRandomWord[i].toUpperCase()) 
+        && lettersToUse.includes(newRandomWord[i]))
       {
         setLettersToUse(removeItem(lettersToUse, newRandomWord[i]));
         return;
@@ -107,14 +96,16 @@ function Scrabble() {
     return event.preventDefault();
   }
 
-  var yellowWords = getAllInputItems(word);
+  // array with the true words from the dictionary
+  const trueWordsInserted = getArrayOfTrueWords(word);
+  var allWords = getAllInputItems(word);
 
   function showAlert(word){
   if (word.length !== 0)
   {
     if (trueWordsInserted.includes(word))
     {
-      if (IsMultipleInArray(yellowWords, word) === false)
+      if (IsMultipleInArray(allWords, word) === false)
       {
         return (
           <div className="App-greenAlert">
@@ -144,12 +135,14 @@ function Scrabble() {
   return;
 }
 
+const allWordsExceptYellow = getAllExceptYellowWords(word);
 const score = totalScore(allWordsExceptYellow);
+const countTrueWords = trueWordsInserted.length;
   
   return (
       <Router>
         <div>
-          <h1 className='App-score'>Stig: {score} | Orð: {countTrueWords()}</h1>
+          <h1 className='App-score'>Stig: {score} | Orð: {countTrueWords}</h1>
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autoComplete="off" onKeyDown={(event) => restrictKey(event)} />
           <input type="submit" onClick={addWord} value="Leita" id ='btn' className='App-button' />
           

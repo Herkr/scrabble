@@ -23,6 +23,7 @@ function TopList() {
 
   const missingW = missingWords(trueWordsInserted, randomLetters)
   const numberOfMissingWords = missingW.length;
+  
   return (
     <div>
       <header className="App-header-list">

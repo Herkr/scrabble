@@ -1,13 +1,14 @@
 import Dictionary from '../json/Dictionary-seven.json';
 import shuffleArray from './ShuffleArray';
 
-// get shuffled word from Dictionary.json with the length 5
+// get shuffled word from Dictionary.json
 function getShuffledWordFromDictionary(lengthOfWord) {
     // array of all the words from the dictionary
     var wordsFromDictionary = Object.keys(Dictionary);
-    // array of all the words with 5 letter
-    var arrayOfNLengthStrings = wordsFromDictionary.filter(word => word.length === lengthOfWord);
-    var shuffledArray = shuffleArray(arrayOfNLengthStrings);
+    // array of all the words with N letter
+    var arrayOfNLength = wordsFromDictionary
+    .filter(word => word.length === lengthOfWord);
+    var shuffledArray = shuffleArray(arrayOfNLength);
     // empty array for words with lower case
     var items = [];
     // unicode: Á=\u00C1 Ð=\u00D0 Í=\u00CD Ó=\u00D3 Ú=\u00DA Ý=\u00DD Æ=\u00C6 Ø=\u00D8'   

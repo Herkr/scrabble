@@ -1,8 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-    // Your web Apps Firebase configurations
-    var firebaseConfig = {
+  // Your web Apps Firebase configurations
+  var firebaseConfig = {
     apiKey: "AIzaSyD0rlPUZM1zxFB3sbQYxNIVHaUlJv782ns",
     authDomain: "scrabble-eb380.firebaseapp.com",
     databaseURL: "https://scrabble-eb380.firebaseio.com",
