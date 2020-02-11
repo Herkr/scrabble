@@ -56,8 +56,14 @@ function App() {
                   <Route path='/scrabble/hard' component={Scrabble} />
                 </UserProvider>
               </Switch>
-          </div>    
+
+              <p/>
+              <p/>
+              <span className="black">Orðalisti: <a href="https://frodskaparfelag.fo/grunnar/ordabokagrunnurin/">Orðabókagrunnurin</a>. Summi orð kunnu hava skeivar bendingar</span>
+              <span className="black">Skapari av heimasíðu: Herborg Kristoffersen</span>
+          </div>
         </div>
+        
       </Router>
     );
 }
