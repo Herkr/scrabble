@@ -2,11 +2,11 @@
 
 import getScoreForWord from './GetScoreForWord';
 
-function totalScore(foundWords) {
+function totalScore(foundWords, wordsFromDictionary) {
     var score = 0;
 
     for (let i = foundWords.length -1; i >= 0; i--) {
-      let scoreForWord = getScoreForWord(foundWords[i]);
+      let scoreForWord = getScoreForWord(foundWords[i], wordsFromDictionary);
       if(scoreForWord !== 0)
       {
         score = score + scoreForWord;

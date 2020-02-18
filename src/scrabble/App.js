@@ -10,17 +10,17 @@ function App() {
   ReactGA();
 
 //context state
-  const level = { easy: 4, medium: 5, hard: 6};
+  const level = { easy: 5, medium: 6, hard: 7};
   const [currentLevel, setCurrentLevel] = useState(level.easy);
     
-  const clickLink4 = () => {
-    document.getElementById('btn4').click();
-  }
   const clickLink5 = () => {
     document.getElementById('btn5').click();
   }
   const clickLink6 = () => {
     document.getElementById('btn6').click();
+  }
+  const clickLink7 = () => {
+    document.getElementById('btn7').click();
   }
 
   return (
@@ -37,14 +37,14 @@ function App() {
             Vel torleikastig
             </p>
             
-            <button className="App-button" onClick={()=>{setCurrentLevel(level.easy); clickLink4()}}>
-              <Link to={'/scrabble/easy'} id='btn4' className="App-link"> Fýra bókstavir </Link>
+            <button className="App-button" onClick={()=>{setCurrentLevel(level.easy); clickLink5()}}>
+              <Link to={'/scrabble/easy'} id='btn5' className="App-link"> Fimm bókstavir </Link>
             </button>
-            <button className="App-button" onClick={()=>{setCurrentLevel(level.medium); clickLink5()}}>
-              <Link to={'/scrabble/medium'} id='btn5' className="App-link"> Fimm bókstavir </Link>
+            <button className="App-button" onClick={()=>{setCurrentLevel(level.medium); clickLink6()}}>
+              <Link to={'/scrabble/medium'} id='btn6' className="App-link"> Seks bókstavir </Link>
             </button>
-            <button className="App-button" onClick={()=>{setCurrentLevel(level.hard); clickLink6()}}>
-              <Link to={'/scrabble/hard'} id='btn6' className="App-link"> Seks bókstavir </Link>
+            <button className="App-button" onClick={()=>{setCurrentLevel(level.hard); clickLink7()}}>
+              <Link to={'/scrabble/hard'} id='btn7' className="App-link"> Sjey bókstavir </Link>
             </button>
           </header>
           
@@ -59,8 +59,8 @@ function App() {
 
               <p/>
               <p/>
-              <span className="black">Orðalisti: <a href="https://frodskaparfelag.fo/grunnar/ordabokagrunnurin/">Orðabókagrunnurin</a>. Summi orð kunnu hava skeivar bendingar</span>
-              <span className="black">Skapari av heimasíðu: Herborg Kristoffersen</span>
+              <span className="dark">Orðalisti: <a href="https://frodskaparfelag.fo/grunnar/ordabokagrunnurin/">Orðabókagrunnurin</a>. Summi orð kunnu hava skeivar bendingar</span>
+              <span className="dark">Forritað heimasíðu: Herborg Kristoffersen</span>
           </div>
         </div>
         

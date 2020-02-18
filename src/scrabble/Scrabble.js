@@ -14,8 +14,12 @@ import getArrayOfTrueWords from '../components/GetArrayOfTrueWords';
 import getShuffledWordFromDictionary from '../components/GetShuffledWordFromDictionary';
 import 'font-awesome/css/font-awesome.min.css';
 import getAllExceptYellowWords from '../components/GetAllExceptYellowWords';
+import Dictionary from '../json/Dictionary-seven.json';
+import missingWords from '../components/MissingWords';
 
 function Scrabble() {
+  var wordsFromDictionary = Object.keys(Dictionary);
+
   const [loading, setLoading] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const isLoadingTrue = () => {
@@ -41,7 +45,7 @@ function Scrabble() {
   const level = useContext(UserContext);
 
   // get the tiles to show on screen
-  var randomLettersBefore = shuffleWord(getShuffledWordFromDictionary(level));
+  var randomLettersBefore = shuffleWord(getShuffledWordFromDictionary(level, wordsFromDictionary));
   const [randomLetters, setRandomLetters] = useState(randomLettersBefore);
   var tiles = getTiles(randomLetters); 
 
@@ -97,7 +101,7 @@ function Scrabble() {
   }
 
   // array with the true words from the dictionary
-  const trueWordsInserted = getArrayOfTrueWords(word);
+  const trueWordsInserted = getArrayOfTrueWords(word, wordsFromDictionary);
   var allWords = getAllInputItems(word);
 
   function showAlert(word){
@@ -109,7 +113,7 @@ function Scrabble() {
       {
         return (
           <div className="App-greenAlert">
-            "{word}" funnið! Tú hevur fingið {getScoreForWord(word)} stig :)
+            "{word}" funnið! Tú hevur fingið {getScoreForWord(word, wordsFromDictionary)} stig :)
           </div>
         );
       }
@@ -135,14 +139,16 @@ function Scrabble() {
   return;
 }
 
-const allWordsExceptYellow = getAllExceptYellowWords(word);
-const score = totalScore(allWordsExceptYellow);
+const allWordsExceptYellow = getAllExceptYellowWords(word, wordsFromDictionary);
+const score = totalScore(allWordsExceptYellow, wordsFromDictionary);
 const countTrueWords = trueWordsInserted.length;
+const numberOfMissingWords = missingWords(trueWordsInserted, randomLetters, wordsFromDictionary).length;
   
   return (
       <Router>
         <div>
           <h1 className='App-score'>Stig: {score} | Orð: {countTrueWords}</h1>
+          <h3>Tú manglar {numberOfMissingWords} orð</h3>
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autoComplete="off" onKeyDown={(event) => restrictKey(event)} />
           <input type="submit" onClick={addWord} value="Leita" id ='btn' className='App-button' />
           

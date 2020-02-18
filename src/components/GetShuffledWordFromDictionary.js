@@ -1,10 +1,7 @@
-import Dictionary from '../json/Dictionary-seven.json';
 import shuffleArray from './ShuffleArray';
 
 // get shuffled word from Dictionary.json
-function getShuffledWordFromDictionary(lengthOfWord) {
-    // array of all the words from the dictionary
-    var wordsFromDictionary = Object.keys(Dictionary);
+function getShuffledWordFromDictionary(lengthOfWord, wordsFromDictionary) {
     // array of all the words with N letter
     var arrayOfNLength = wordsFromDictionary
     .filter(word => word.length === lengthOfWord);

@@ -1,25 +1,26 @@
 import isWordInDirectory from './IsWordInDirectory';
 
-function allTrueComb(word) {
+function allTrueComb(word, wordsFromDictionary) {
   var comb = allCombinations(word);
   var trueArray = [];
-
-  for (let i = comb.length -1; i >= 0; i--) {
-    if(isWordInDirectory(comb[i]) === true)
+  for (let i = comb.length -1; i >= 0; i--) {  
+    if(isWordInDirectory(comb[i], wordsFromDictionary) === true)
     {
       trueArray.push(comb[i]);
     }
   }
   return trueArray;
 }
-
+/*
 function allCombinations(word) {
+  
   var replacedA = [];
   var replacedB = [];
   var replacedC = [];
   var replacedD = [];
   var replacedE = [];
   var replacedF = [];
+  var replacedG = [];
 
   var combArray = [];
 
@@ -110,19 +111,17 @@ function allCombinations(word) {
     }
 
     return replacedF;
-  }
+}}*/
 
-  /*
-const allCombinations = function(word) {
+const allCombinations = function(words) {
   var comb = [];
-  if (word.length === 1) return word;
-  for (let i = word.length -1; i >= 0; i--) {
-    allCombinations(word.join('').replace(word[i], '').split('')).concat("").map(function(subtree) {
-      return comb.push([word[i]].concat(subtree));
+  if (words.length === 1) return words;
+  for (let i = words.length -1; i >= 0; i--) {
+    allCombinations(words.join('').replace(words[i], '').split('')).concat("").map(function(subtree) {
+      return comb.push([words[i]].concat(subtree));
     });
   }
   return comb.map(function(str) {return str.join('')});
-};*/
-}
+};
 
 export default allTrueComb;

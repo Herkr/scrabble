@@ -1,8 +1,8 @@
 import trueWordComb from './Word-combinations';
 
-function missingWords(trueWordsInserted, rand) {
+function missingWords(trueWordsInserted, rand, wordsFromDictionary) {
     const missing = [];
-    const trueCombinations = trueWordComb(rand);
+    const trueCombinations = trueWordComb(rand, wordsFromDictionary);
   
     for (let i = trueCombinations.length -1; i >= 0; i--) {
       // inserted words that are true 

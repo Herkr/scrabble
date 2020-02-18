@@ -4,6 +4,7 @@ import AddScoreEntryForm from '../components/add-score-entry-form';
 import UserContext from './UserContext';
 import missingWords from '../components/MissingWords';
 import { UserProvider } from './UserContext';
+import Dictionary from '../json/Dictionary-seven.json';
 
 function TopList() {
 
@@ -21,7 +22,8 @@ function TopList() {
   const randomLetters = useContext(UserContext)[1];
   const trueWordsInserted = useContext(UserContext)[2];
 
-  const missingW = missingWords(trueWordsInserted, randomLetters)
+  var wordsFromDictionary = Object.keys(Dictionary);
+  const missingW = missingWords(trueWordsInserted, randomLetters, wordsFromDictionary)
   const numberOfMissingWords = missingW.length;
   
   return (

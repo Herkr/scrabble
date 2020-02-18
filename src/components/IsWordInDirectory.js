@@ -1,11 +1,8 @@
-import Dictionary from '../json/Dictionary-seven.json';
 import AlphabetStarts from '../json/Alphabet-index-start';
 
 
-function isWordInDirectory(word) {
+function isWordInDirectory(word, wordsFromDictionary) {
   // array of all the words from the dictionary
-  var wordsFromDictionary = Object.keys(Dictionary);
-  
   if(word.length !== 0)
   {
     for (let i=0; i<AlphabetStarts.length; i++)

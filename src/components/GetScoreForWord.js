@@ -1,9 +1,9 @@
 import Alphabet from '../components/Alphabet';
 import IsWordInDictionary from '../components/IsWordInDirectory';
 
-function  getScoreForWord(word) {
+function  getScoreForWord(word, wordsFromDictionary) {
     var score = 0;
-    if(IsWordInDictionary(word))
+    if(IsWordInDictionary(word, wordsFromDictionary))
     {
       for(let i = word.length - 1; i >= 0; i--) {
         for(let j = Alphabet.length - 1; j >= 0; j--) {
