@@ -11,6 +11,18 @@ function allTrueComb(word, wordsFromDictionary) {
   }
   return trueArray;
 }
+
+const allCombinations = function(words) {
+  var comb = [];
+  if (words.length === 1) return words;
+  for (let i = words.length -1; i >= 0; i--) {
+    allCombinations(words.join('').replace(words[i], '').split('')).concat("").map(function(subtree) {
+      return comb.push([words[i]].concat(subtree));
+    });
+  }
+  return comb.map(function(str) {return str.join('')});
+};
+
 /*
 function allCombinations(word) {
   
@@ -112,16 +124,5 @@ function allCombinations(word) {
 
     return replacedF;
 }}*/
-
-const allCombinations = function(words) {
-  var comb = [];
-  if (words.length === 1) return words;
-  for (let i = words.length -1; i >= 0; i--) {
-    allCombinations(words.join('').replace(words[i], '').split('')).concat("").map(function(subtree) {
-      return comb.push([words[i]].concat(subtree));
-    });
-  }
-  return comb.map(function(str) {return str.join('')});
-};
 
 export default allTrueComb;

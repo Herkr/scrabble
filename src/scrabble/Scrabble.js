@@ -161,9 +161,7 @@ const numberOfMissingWords = missingWords(trueWordsInserted, randomLetters, word
           <h3>Um øll orðini eru funnin, verða {level*25} eyka stig givin</h3>
           
           <button className="App-button" id="btn3" onMouseDown={isLoadingTrue}><Link to={'/scrabble/toplist'} onClick={isLoadingFalse} className="App-link" id='link'>
-            {loading && (
-            <i className="fa fa-spinner fa-spin"></i>
-            )}
+            {loading && (<i className="fa fa-spinner fa-spin"></i>)}
             {loading && <span> Innlesur</span>}
             {!loading && !gameOver && <span>Eg gevi upp</span>}
             {!loading && gameOver}
