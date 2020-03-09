@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as HashRouter, Switch, Route, Link } from 'react-router-dom';
 import Scrabble from './Scrabble';
 import { UserProvider } from './UserContext';
 import "../css/Scrabble.css";
@@ -49,7 +49,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <HashRouter basename='/'>
         <div className="App">
           <header className="App-header">
 
@@ -89,7 +89,7 @@ function App() {
           </div>
         </div>
         
-      </Router>
+      </HashRouter>
     );
 }
 
