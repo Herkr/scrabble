@@ -143,12 +143,17 @@ const allWordsExceptYellow = getAllExceptYellowWords(word, wordsFromDictionary);
 const score = totalScore(allWordsExceptYellow, wordsFromDictionary);
 const countTrueWords = trueWordsInserted.length;
 const numberOfMissingWords = missingWords(trueWordsInserted, randomLetters, wordsFromDictionary).length;
-  
+
+if(numberOfMissingWords === 0 && gameOver === false)
+{
+  isLoadingTrue();
+}
+
   return (
       <Router>
         <div>
           <h1 className='App-score'>Stig: {score} | Orð: {countTrueWords}</h1>
-          <h3>Tú manglar {numberOfMissingWords} orð</h3>
+          <h3 className='App-score'>Tú manglar {numberOfMissingWords} orð</h3>
           <input type='text' name='word' id='word' className= 'App-input-box' maxLength={level} placeholder='Skriva orð her' autoComplete="off" onKeyDown={(event) => restrictKey(event)} />
           <input type="submit" onClick={addWord} value="Leita" id ='btn' className='App-button' />
           
