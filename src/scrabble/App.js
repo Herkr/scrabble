@@ -12,14 +12,39 @@ function App() {
 //context state
   const level = { easy: 5, medium: 6, hard: 7};
   const [currentLevel, setCurrentLevel] = useState(level.easy);
+  const [clickedTwice, setClickedTwice] = useState(false);
     
   const clickLink5 = () => {
+    if(currentLevel === 5)
+    {
+      setClickedTwice(true);
+    }
+    else
+    {
+      setClickedTwice(false);
+    }
     document.getElementById('btn5').click();
   }
   const clickLink6 = () => {
+    if(currentLevel === 6)
+    {
+      setClickedTwice(true);
+    }
+    else
+    {
+      setClickedTwice(false);
+    }
     document.getElementById('btn6').click();
   }
   const clickLink7 = () => {
+    if(currentLevel === 7)
+    {
+      setClickedTwice(true);
+    }
+    else
+    {
+      setClickedTwice(false);
+    }
     document.getElementById('btn7').click();
   }
 
@@ -50,7 +75,7 @@ function App() {
           
           <div className="App-body">
               <Switch>
-                <UserProvider value={currentLevel}>
+                <UserProvider value={[currentLevel, clickedTwice]}>
                   <Route exact path='/scrabble/easy' component={Scrabble} />
                   <Route path='/scrabble/medium' component={Scrabble} />
                   <Route path='/scrabble/hard' component={Scrabble} />

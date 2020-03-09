@@ -42,7 +42,14 @@ function Scrabble() {
   }
 
   //context state frá App.js
-  const level = useContext(UserContext);
+  const level = useContext(UserContext)[0];
+  const clickedTwice = useContext(UserContext)[1];
+
+  // if level button is clicked twice, the page rerenders!
+  if(clickedTwice)
+  {
+    window.location.reload(true);
+  }
 
   // get the tiles to show on screen
   var randomLettersBefore = shuffleWord(getShuffledWordFromDictionary(level, wordsFromDictionary));
@@ -54,9 +61,9 @@ function Scrabble() {
   const [word, setWord] = useState(wordArray);
   const addWord = () => {
     // to keep the random word from not changing
-    var newRandomWord = randomLetters;
-    setRandomLetters(newRandomWord);
-    setLettersToUse(newRandomWord);
+    //var newRandomWord = randomLetters;
+    setRandomLetters(randomLetters);
+    setLettersToUse(randomLetters);
     var inputWord = document.getElementById('word').value.toLowerCase();
     // clear input field when 'leita' button pressed
     document.getElementById('word').value = "";
