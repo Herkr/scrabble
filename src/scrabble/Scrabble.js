@@ -42,10 +42,18 @@ function Scrabble() {
   const wordsFromDictionary = useContext(UserContext)[1];
   const randomLetters = useContext(UserContext)[2];
 
+  // last random shown, when level button clicked twice
+  const [testRandomLetters, setTestRandomLetters] = useState(randomLetters);
+  // if same letter is written multiple times
   const [lettersToUse, setLettersToUse] = useState(randomLetters);
 
-  console.log("to use= " + lettersToUse)
-  console.log(randomLetters);
+  // current tiles and latest tiles are not the same,
+  // set the LettersToUse for restriction use
+  if (randomLetters !== testRandomLetters)
+  {
+    setLettersToUse(randomLetters);
+    setTestRandomLetters(randomLetters);
+  }
 
   // get the tiles to show on screen
   var tiles = getTiles(randomLetters); 

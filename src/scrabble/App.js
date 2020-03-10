@@ -18,27 +18,21 @@ function App() {
   const [currentLevel, setCurrentLevel] = useState(level.easy);
 
   const randomLettersBefore = shuffleWord(getShuffledWordFromDictionary(currentLevel, wordsFromDictionary));
-  const [randomLetters, setRandomLetters] = useState(randomLettersBefore); 
-  // if same letter is written multiple times
-  const [lettersToUse, setLettersToUse] = useState(randomLetters);
+  const [randomLetters, setRandomLetters] = useState(randomLettersBefore);
 
   const clickLink5 = () => {
-    window.location.reload();
     var word5 = shuffleWord(getShuffledWordFromDictionary(5, wordsFromDictionary))
     setRandomLetters(word5);
-    setLettersToUse(word5);
     document.getElementById('btn5').click();
   }
   const clickLink6 = () => {
     var word6 = shuffleWord(getShuffledWordFromDictionary(6, wordsFromDictionary));
     setRandomLetters(word6);
-    setLettersToUse(word6);
     document.getElementById('btn6').click();
   }
   const clickLink7 = () => {
     var word7 = shuffleWord(getShuffledWordFromDictionary(7, wordsFromDictionary));
     setRandomLetters(word7);
-    setLettersToUse(word7);
     document.getElementById('btn7').click();
   }
 
@@ -69,7 +63,7 @@ function App() {
           
           <div className="App-body">
               <Switch>
-                <UserProvider value={[currentLevel, wordsFromDictionary, randomLetters, lettersToUse]}>
+                <UserProvider value={[currentLevel, wordsFromDictionary, randomLetters]}>
                   <Route exact path='/scrabble/easy' component={Scrabble} />
                   <Route path='/scrabble/medium' component={Scrabble} />
                   <Route path='/scrabble/hard' component={Scrabble} />
