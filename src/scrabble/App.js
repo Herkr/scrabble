@@ -4,47 +4,41 @@ import Scrabble from './Scrabble';
 import { UserProvider } from './UserContext';
 import "../css/Scrabble.css";
 import ReactGA from '../components/ReactGA';
+import Dictionary from '../json/Dictionary-seven.json';
+import shuffleWord from '../components/ShuffleWord';
+import getShuffledWordFromDictionary from '../components/GetShuffledWordFromDictionary';
 
 function App() {
   // google analytics
   ReactGA();
 
+  var wordsFromDictionary = Object.keys(Dictionary);
 //context state
   const level = { easy: 5, medium: 6, hard: 7};
   const [currentLevel, setCurrentLevel] = useState(level.easy);
-  const [clickedTwice, setClickedTwice] = useState(false);
-    
+
+  const randomLettersBefore = shuffleWord(getShuffledWordFromDictionary(currentLevel, wordsFromDictionary));
+  const [randomLetters, setRandomLetters] = useState(randomLettersBefore); 
+  // if same letter is written multiple times
+  const [lettersToUse, setLettersToUse] = useState(randomLetters);
+
   const clickLink5 = () => {
-    if(currentLevel === 5)
-    {
-      setClickedTwice(true);
-    }
-    else
-    {
-      setClickedTwice(false);
-    }
+    window.location.reload();
+    var word5 = shuffleWord(getShuffledWordFromDictionary(5, wordsFromDictionary))
+    setRandomLetters(word5);
+    setLettersToUse(word5);
     document.getElementById('btn5').click();
   }
   const clickLink6 = () => {
-    if(currentLevel === 6)
-    {
-      setClickedTwice(true);
-    }
-    else
-    {
-      setClickedTwice(false);
-    }
+    var word6 = shuffleWord(getShuffledWordFromDictionary(6, wordsFromDictionary));
+    setRandomLetters(word6);
+    setLettersToUse(word6);
     document.getElementById('btn6').click();
   }
   const clickLink7 = () => {
-    if(currentLevel === 7)
-    {
-      setClickedTwice(true);
-    }
-    else
-    {
-      setClickedTwice(false);
-    }
+    var word7 = shuffleWord(getShuffledWordFromDictionary(7, wordsFromDictionary));
+    setRandomLetters(word7);
+    setLettersToUse(word7);
     document.getElementById('btn7').click();
   }
 
@@ -75,7 +69,7 @@ function App() {
           
           <div className="App-body">
               <Switch>
-                <UserProvider value={[currentLevel, clickedTwice]}>
+                <UserProvider value={[currentLevel, wordsFromDictionary, randomLetters, lettersToUse]}>
                   <Route exact path='/scrabble/easy' component={Scrabble} />
                   <Route path='/scrabble/medium' component={Scrabble} />
                   <Route path='/scrabble/hard' component={Scrabble} />

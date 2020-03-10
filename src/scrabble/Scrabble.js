@@ -9,16 +9,12 @@ import removeItem from '../components/RemoveItem';
 import getAllInputItems from '../components/GetAllInputItems';
 import getScoreForWord from '../components/GetScoreForWord';
 import totalScore from '../components/TotalScore';
-import shuffleWord from '../components/ShuffleWord';
 import getArrayOfTrueWords from '../components/GetArrayOfTrueWords';
-import getShuffledWordFromDictionary from '../components/GetShuffledWordFromDictionary';
 import 'font-awesome/css/font-awesome.min.css';
 import getAllExceptYellowWords from '../components/GetAllExceptYellowWords';
-import Dictionary from '../json/Dictionary-seven.json';
 import missingWords from '../components/MissingWords';
 
 function Scrabble() {
-  var wordsFromDictionary = Object.keys(Dictionary);
 
   const [loading, setLoading] = useState(false);
   const [gameOver, setGameOver] = useState(false);
@@ -43,17 +39,15 @@ function Scrabble() {
 
   //context state frá App.js
   const level = useContext(UserContext)[0];
-  const clickedTwice = useContext(UserContext)[1];
+  const wordsFromDictionary = useContext(UserContext)[1];
+  const randomLetters = useContext(UserContext)[2];
 
-  // if level button is clicked twice, the page rerenders!
-  if(clickedTwice)
-  {
-    window.location.reload(true);
-  }
+  const [lettersToUse, setLettersToUse] = useState(randomLetters);
+
+  console.log("to use= " + lettersToUse)
+  console.log(randomLetters);
 
   // get the tiles to show on screen
-  var randomLettersBefore = shuffleWord(getShuffledWordFromDictionary(level, wordsFromDictionary));
-  const [randomLetters, setRandomLetters] = useState(randomLettersBefore);
   var tiles = getTiles(randomLetters); 
 
   // localstorage
@@ -62,7 +56,7 @@ function Scrabble() {
   const addWord = () => {
     // to keep the random word from not changing
     //var newRandomWord = randomLetters;
-    setRandomLetters(randomLetters);
+    //setRandomLetters(randomLetters);
     setLettersToUse(randomLetters);
     var inputWord = document.getElementById('word').value.toLowerCase();
     // clear input field when 'leita' button pressed
@@ -70,9 +64,6 @@ function Scrabble() {
     
     return setWord(inputWord + ' ' + word);
   }
-
-  // if same letter is written multiple times
-  const [lettersToUse, setLettersToUse] = useState(randomLetters);
   
   const restrictKey = event => {
     var newRandomWord = [];
