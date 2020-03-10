@@ -21,8 +21,9 @@ function App() {
   const [randomLetters, setRandomLetters] = useState(randomLettersBefore);
 
   const clickLink5 = () => {
-    var word5 = shuffleWord(getShuffledWordFromDictionary(5, wordsFromDictionary))
-    setRandomLetters(word5);
+    window.location.reload();
+    //var word5 = shuffleWord(getShuffledWordFromDictionary(5, wordsFromDictionary))
+    //setRandomLetters(word5);
     document.getElementById('btn5').click();
   }
   const clickLink6 = () => {
